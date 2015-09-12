@@ -10,31 +10,14 @@ import Foundation
 import Parse
 class Group {
     
-    func getGroup(groupID : String) -> PFObject{
-        var group = PFObject(className: "Groups")
-        var query = PFQuery(className:"Groups")
-        query.getObjectInBackgroundWithId(groupID) {
-            (group: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println(error)
-            } else if let group = group {
-            }
-        }
-        return group
-    }
-    
-    func getMembers(groupID : String) -> [PFObject]{
-        var group = getGroup(groupID)
-        return group["Members"] as! [(PFObject)]
-    }
-    
-    
-    func addMember(groupID: String, userID : String){
-        var members = getMembers(groupID)
-        members.append(PFObject(withoutDataWithClassName:"Users", objectId: userID))
+    static func addMember(groupID:String , userID:String){
+        var members = PFObject(className: "Members")
+        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userID)
+        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: groupID)
+        members.setObject(userPointer, forKey: "Member")
         
-        var group = getGroup(groupID)
-        group.setObject(members, forKey: "Members")
+        members.setObject(groupPointer, forKey: "Group")
         
+        members.saveInBackground()
     }
 }
