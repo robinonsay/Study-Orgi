@@ -10,34 +10,39 @@ import Foundation
 import Parse
 class Group {
     
-    static func addMember(groupID:String , userID:String){
+    static func addMember(groupID:PFObject , userID:PFObject){
         var members = PFObject(className: "Members")
-        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userID)
-        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: groupID)
-        members.setObject(userPointer, forKey: "Member")
+                members.setObject(userID, forKey: "Member")
         
-        members.setObject(groupPointer, forKey: "Group")
+        members.setObject(groupID, forKey: "Group")
         
         members.saveInBackground()
     }
     
-    static func rmvMember(groupID:String , userID:String){
+    static func rmvMember2(groupObjectID: String, memberObjectID: String) {
+        let group = PFQuery(className: "Groups").getObjectWithId(groupObjectID) as PFObject!
+        let member = PFQuery(className: "Members").getObjectWithId(memberObjectID) as PFObject!
+        //member["Group"] = nil
+        member.setObject(NSNull(), forKey: "Group")
+        member?.save()
+    }
+    
+    static func rmvMember(groupID:PFObject , userID:PFObject){
         var member = PFQuery(className:"Members")
-        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userID)
-        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: groupID)
-        member.whereKey("Member", equalTo: userPointer)
+        
+        member.whereKey("Member", equalTo: userID)
         
         var group = PFQuery(className:"Members")
-        group.whereKey("Group", equalTo: groupPointer)
+        group.whereKey("Group", equalTo: groupID)
         
         var query = PFQuery.orQueryWithSubqueries([member, group])
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
-            if error != nil {
+            if error == nil {
                 // results contains Member in group
                 for objects in results as! [PFObject]{
                     objects.deleteInBackground()
-                    objects.saveInBackground()
+//                    objects.saveInBackground()
                 }
                 
             }
