@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 import Parse
-import FBSDKCoreKit
-import ParseFacebookUtilsV4
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,6 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         //Parse.setApplicationId("parseAppId", clientKey:"parseClientKey")
         //PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+        
+        UINavigationBar.appearance().barTintColor = UIColorFromHex(0xF68E20, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+        
+        UITableViewCell.appearance().tintColor = UIColorFromHex(0xF68E20, alpha: 1.0)
         return true
     }
 
@@ -124,6 +131,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
 
 }
