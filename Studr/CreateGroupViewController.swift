@@ -130,6 +130,16 @@ class CreateGroupViewController: XLFormViewController {
         print(dictionary)
         
         // Store in database here
+        
+            var title = dictionary[Tags.Title.rawValue] as! String
+            var description = dictionary[Tags.Title.rawValue] as! String
+            var location = dictionary[Tags.Title.rawValue] as! String
+            //var access = dictionary[Tags.Title.rawValue] as! Bool
+        
+        Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
+        
+        
+        
     }
     
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {

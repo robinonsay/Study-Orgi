@@ -43,9 +43,33 @@ class Database {
         }
         
     }
-    
+    static func getSomeFriends()->[PFObject]{
+        var quereyRec = PFQuery(className: "FriendRequests")
+        quereyRec.whereKey("Receiver", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
+        var quereySender = PFQuery(className: "FriendRequests")
+        quereySender.whereKey("Sender", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
+        var status = PFQuery(className: "FriendRequests")
+        status.whereKey("Accepted", equalTo: true)
+        var friends = [PFObject]()
+        var querey = PFQuery.orQueryWithSubqueries([quereyRec,status])
+        querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil{
+                friends = results as! [PFObject]
+            }
+        }
+        
+        var querey2 = PFQuery.orQueryWithSubqueries([quereyRec,status])
+        querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
+            if error == nil{
+                friends = friends + (results as! [PFObject])
+            }
+        }
+        return friends
+
+    }
     static func mkGroup(title:String, description:String, isPublic:Bool,
-        creatorID:String, startDate:NSDate, endDate:NSDate){
+        startDate:NSDate, endDate:NSDate, location:String){
+            var creatorID = PFUser.currentUser()?.objectId
             print("add")
             let userPointer = PFObject(withoutDataWithClassName:USER, objectId: creatorID)
             let group = PFObject(className: "Group")
@@ -58,6 +82,7 @@ class Database {
             group.setObject(startDate, forKey: "Start")
             group.setObject(endDate, forKey: "End")
             group.addObject(userPointer, forKey: "members")
+            group.setObject(location, forKey: "Location")
 
             //Push that PFObject onto the database
             group.saveInBackground()

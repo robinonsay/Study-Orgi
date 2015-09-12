@@ -31,6 +31,7 @@
 		030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */; };
 		030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */; };
 		030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72581BA4BC52007F7200 /* GroupTableViewController.swift */; };
+		CC28027C1BA4CA680045C5F8 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28027B1BA4CA680045C5F8 /* Database.swift */; };
 		FB272AAB61975E9151E5033C /* Pods_Studr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661CC81EAD296B5D2687976 /* Pods_Studr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		5C10A888ACB9DEF36F061F5F /* Pods-Studr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.release.xcconfig"; sourceTree = "<group>"; };
 		7661CC81EAD296B5D2687976 /* Pods_Studr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC035CF6D61E01DCF33C067C /* Pods-Studr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.debug.xcconfig"; sourceTree = "<group>"; };
+		CC28027B1BA4CA680045C5F8 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				030C71F51BA4B6FB007F7200 /* ViewController.swift */,
 				030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */,
 				030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */,
+				CC28027B1BA4CA680045C5F8 /* Database.swift */,
 				030C72581BA4BC52007F7200 /* GroupTableViewController.swift */,
 				030C71F71BA4B6FB007F7200 /* Main.storyboard */,
 				030C71FA1BA4B6FB007F7200 /* Images.xcassets */,
@@ -367,6 +370,7 @@
 				030C71F61BA4B6FB007F7200 /* ViewController.swift in Sources */,
 				030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */,
 				030C71F41BA4B6FB007F7200 /* AppDelegate.swift in Sources */,
+				CC28027C1BA4CA680045C5F8 /* Database.swift in Sources */,
 				030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */,
 				030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */,
 			);
