@@ -21,11 +21,9 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
-        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: "PZgt6F5FZZ")
-        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: "PLkREcfsg5")
-        //Group.rmvMember2("PZgt6F5FZZ", memberObjectID: "WgSoR4YDBe")
-        Group.rmvMember("PLkREcfsg5", userID: "PZgt6F5FZZ")
-//        Group.rmvMember(userPointer, userID: groupPointer)
+        
+        Database.requestFriend("PrFt1Q2nlK")
+        
         // Create Login view controller
         logInViewController = PFLogInViewController()
         logInViewController.delegate = self
