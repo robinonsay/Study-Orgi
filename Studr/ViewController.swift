@@ -22,7 +22,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
         var group = Group()
-        Group.addMember("PZgt6F5FZZ", userID: "PLkREcfsg5")
+        Group.rmvMember("PZgt6F5FZZ", userID: "PLkREcfsg5")
         // Create Login view controller
         logInViewController = PFLogInViewController()
         logInViewController.delegate = self

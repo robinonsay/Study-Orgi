@@ -20,4 +20,28 @@ class Group {
         
         members.saveInBackground()
     }
+    
+    static func rmvMember(groupID:String , userID:String){
+        var member = PFQuery(className:"Members")
+        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userID)
+        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: groupID)
+        member.whereKey("Member", equalTo: userPointer)
+        
+        var group = PFQuery(className:"Members")
+        group.whereKey("Group", equalTo: groupPointer)
+        
+        var query = PFQuery.orQueryWithSubqueries([member, group])
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            if error != nil {
+                // results contains Member in group
+                for objects in results as! [PFObject]{
+                    objects.deleteInBackground()
+                    objects.saveInBackground()
+                }
+                
+            }
+            
+        }
+    }
 }
