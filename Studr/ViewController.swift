@@ -24,6 +24,8 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
         
+        PFUser.logOut()
+        
         // If there is currently no user logged in, promt the user to login
         if (PFUser.currentUser() == nil) {
             // Create Login view controller
@@ -33,6 +35,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
                 | PFLogInFields.LogInButton
                 | PFLogInFields.SignUpButton
                 | PFLogInFields.PasswordForgotten)
+            self.logInViewController.emailAsUsername = true
             
             self.presentViewController(logInViewController, animated:true, completion: nil)
         }

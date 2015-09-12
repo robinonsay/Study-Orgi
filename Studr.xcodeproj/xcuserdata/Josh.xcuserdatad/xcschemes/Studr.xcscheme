@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCBC0ACD1BA3D962001E617E"
+               BlueprintIdentifier = "030C71ED1BA4B6FB007F7200"
                BuildableName = "Studr.app"
                BlueprintName = "Studr"
                ReferencedContainer = "container:Studr.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCBC0AE51BA3D963001E617E"
+               BlueprintIdentifier = "030C72021BA4B6FB007F7200"
                BuildableName = "StudrTests.xctest"
                BlueprintName = "StudrTests"
                ReferencedContainer = "container:Studr.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCBC0AE51BA3D963001E617E"
+               BlueprintIdentifier = "030C72021BA4B6FB007F7200"
                BuildableName = "StudrTests.xctest"
                BlueprintName = "StudrTests"
                ReferencedContainer = "container:Studr.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCBC0ACD1BA3D962001E617E"
+            BlueprintIdentifier = "030C71ED1BA4B6FB007F7200"
             BuildableName = "Studr.app"
             BlueprintName = "Studr"
             ReferencedContainer = "container:Studr.xcodeproj">
@@ -76,7 +76,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCBC0ACD1BA3D962001E617E"
+            BlueprintIdentifier = "030C71ED1BA4B6FB007F7200"
             BuildableName = "Studr.app"
             BlueprintName = "Studr"
             ReferencedContainer = "container:Studr.xcodeproj">
@@ -95,7 +95,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCBC0ACD1BA3D962001E617E"
+            BlueprintIdentifier = "030C71ED1BA4B6FB007F7200"
             BuildableName = "Studr.app"
             BlueprintName = "Studr"
             ReferencedContainer = "container:Studr.xcodeproj">
