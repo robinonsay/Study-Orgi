@@ -24,7 +24,9 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: "PZgt6F5FZZ")
         let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: "PLkREcfsg5")
         //Group.rmvMember2("PZgt6F5FZZ", memberObjectID: "WgSoR4YDBe")
-        Group.rmvMember("PLkREcfsg5", userID: "PZgt6F5FZZ")
+        var date = NSDate(timeIntervalSinceNow: 6000)
+        Group.mkGroup("Hello World", description: "This is a hello world group", ppublic: true, creatorID: "PZgt6F5FZZ", startDate: NSDate(), endDate: date)
+        //Group.rmvMember("PLkREcfsg5", userID: "PZgt6F5FZZ")
 //        Group.rmvMember(userPointer, userID: groupPointer)
         // Create Login view controller
         logInViewController = PFLogInViewController()

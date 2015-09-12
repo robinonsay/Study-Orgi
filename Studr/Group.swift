@@ -20,20 +20,70 @@ class Group {
         
         members.saveInBackground()
     }
-    //only sets it to null
-    static func rmvMember2(groupObjectID: String, memberObjectID: String) {
-        let group = PFQuery(className: "Groups").getObjectWithId(groupObjectID) as PFObject!
-        let member = PFQuery(className: "Members").getObjectWithId(memberObjectID) as PFObject!
-        //member["Group"] = nil
-        member.setObject(NSNull(), forKey: "Group")
-        member?.save()
-        
-        
+    static func mkGroup(title:String, description:String, ppublic:Bool,
+        creatorID:String, startDate:NSDate, endDate:NSDate){
+            //Group is creator
+            let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: creatorID)
+            let group = PFObject(className: "Group")
+            group.setObject(title, forKey: "Title")
+            group.setObject(description, forKey: "Description")
+            group.setObject(ppublic, forKey: "Public")
+            group.setObject(userPointer, forKey: "Creator")
+            group.setObject(startDate, forKey: "Start")
+            group.setObject(endDate, forKey: "End")
+            if !isTitleTaken(creatorID, title: title){
+                group.saveInBackground()
+                getGroupId(creatorID, title: title)
+                
+            }
+            
+            
+            
+            
     }
     
-    static func bestDate(){
+    static func getGroupId(creatorId:String, title:String)->String{
+        var creator = PFQuery(className: "Groups")
+        
+        creator.whereKey("Creator", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: creatorId))
+        
+        var titles = PFQuery(className: "Groups")
+        
+        titles.whereKey("Title", equalTo: title)
+        var query = PFQuery.orQueryWithSubqueries([creator, titles])
+        var id:String
+        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
+            let obj:PFObject = results[0] as! PFObject
+            
+            id = obj.objectId!
+            println(id)
+        }
+    }
+   
+    static func isTitleTaken(creatorID:String, title:String)->Bool{
+        var isTaken = true
+        var creator = PFQuery(className: "Groups")
+        
+        creator.whereKey("Creator", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: creatorID))
+        
+        var titles = PFQuery(className: "Groups")
+        
+        titles.whereKey("Title", equalTo: title)
+        var id:PFObject!
+        var query = PFQuery.orQueryWithSubqueries([creator, titles])
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil && results == nil {
+                // results contains Member in group
+               isTaken = false
+                
+                
+            }
+        }
+        return isTaken
         
     }
+
     static func pickBestDay(group:String, startDate:NSDate, endDate:NSDate){
         
     }
