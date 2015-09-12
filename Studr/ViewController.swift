@@ -7,19 +7,38 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        
+        // Create Login view controller
+        var logInViewController:PFLogInViewController = PFLogInViewController()
+        logInViewController.delegate = self
+        logInViewController.fields = (PFLogInFields.UsernameAndPassword
+                                        | PFLogInFields.LogInButton
+                                        | PFLogInFields.SignUpButton
+                                        | PFLogInFields.PasswordForgotten)
+        
+        self.presentViewController(logInViewController, animated:true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        
+    }
 }
 
