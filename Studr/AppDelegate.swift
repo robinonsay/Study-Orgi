@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 import Parse
-
+import FBSDKCoreKit
+import ParseFacebookUtilsV4
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Parse.setApplicationId("SiUI7l8keFbkruaPeGJGFysV1QRvFh8doFEIDn46", clientKey: "uIRt8lWTeyYLRUXUoWdZHoIQEN289OripAM6ucRh")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        Parse.setApplicationId("parseAppId", clientKey:"parseClientKey")
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         return true
     }
 
