@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		036C339B1BA3DD16000A1051 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C33991BA3DD16000A1051 /* Bolts.framework */; };
 		036C339C1BA3DD16000A1051 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C339A1BA3DD16000A1051 /* Parse.framework */; };
-		036C339E1BA3DF34000A1051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C339D1BA3DF34000A1051 /* FacebookSDK.framework */; };
-		036C33A21BA3E089000A1051 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C33A11BA3E089000A1051 /* ParseUI.framework */; };
+		036C33A41BA3F049000A1051 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C33A31BA3F049000A1051 /* ParseUI.framework */; };
+		036C33A61BA3F05D000A1051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C33A51BA3F05D000A1051 /* FacebookSDK.framework */; };
 		CCBC0AD41BA3D962001E617E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC0AD31BA3D962001E617E /* AppDelegate.swift */; };
 		CCBC0AD71BA3D962001E617E /* Studr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBC0AD51BA3D962001E617E /* Studr.xcdatamodeld */; };
 		CCBC0AD91BA3D962001E617E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC0AD81BA3D962001E617E /* ViewController.swift */; };
@@ -45,8 +45,8 @@
 /* Begin PBXFileReference section */
 		036C33991BA3DD16000A1051 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Downloads/parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
 		036C339A1BA3DD16000A1051 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../Downloads/parse-library-1/Parse.framework"; sourceTree = "<group>"; };
-		036C339D1BA3DF34000A1051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../Downloads/ParsePlatform-LoginAndSignUpTutorial-0710943/FacebookSDK.framework"; sourceTree = "<group>"; };
-		036C33A11BA3E089000A1051 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ../../Downloads/ParseUI.framework; sourceTree = "<group>"; };
+		036C33A31BA3F049000A1051 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Studr/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
+		036C33A51BA3F05D000A1051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Studr/Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
 		CCBC0ACE1BA3D962001E617E /* Studr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBC0AD21BA3D962001E617E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCBC0AD31BA3D962001E617E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036C33A21BA3E089000A1051 /* ParseUI.framework in Frameworks */,
-				036C339E1BA3DF34000A1051 /* FacebookSDK.framework in Frameworks */,
+				036C33A61BA3F05D000A1051 /* FacebookSDK.framework in Frameworks */,
+				036C33A41BA3F049000A1051 /* ParseUI.framework in Frameworks */,
 				036C339B1BA3DD16000A1051 /* Bolts.framework in Frameworks */,
 				036C339C1BA3DD16000A1051 /* Parse.framework in Frameworks */,
 				CCBC0B111BA3DA6D001E617E /* libsqlite3.dylib in Frameworks */,
@@ -109,8 +109,8 @@
 		CCBC0AC51BA3D962001E617E = {
 			isa = PBXGroup;
 			children = (
-				036C33A11BA3E089000A1051 /* ParseUI.framework */,
-				036C339D1BA3DF34000A1051 /* FacebookSDK.framework */,
+				036C33A51BA3F05D000A1051 /* FacebookSDK.framework */,
+				036C33A31BA3F049000A1051 /* ParseUI.framework */,
 				036C33991BA3DD16000A1051 /* Bolts.framework */,
 				036C339A1BA3DD16000A1051 /* Parse.framework */,
 				CCBC0B101BA3DA6D001E617E /* libsqlite3.dylib */,
@@ -414,6 +414,7 @@
 					"/Users/Josh/Downloads/parse-library-1",
 					"/Users/Josh/Downloads/ParsePlatform-LoginAndSignUpTutorial-0710943",
 					/Users/Josh/Downloads,
+					"$(PROJECT_DIR)/Studr/Frameworks",
 				);
 				INFOPLIST_FILE = Studr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -431,6 +432,7 @@
 					"/Users/Josh/Downloads/parse-library-1",
 					"/Users/Josh/Downloads/ParsePlatform-LoginAndSignUpTutorial-0710943",
 					/Users/Josh/Downloads,
+					"$(PROJECT_DIR)/Studr/Frameworks",
 				);
 				INFOPLIST_FILE = Studr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

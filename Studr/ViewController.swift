@@ -12,6 +12,8 @@ import ParseUI
 
 class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
     
+    var logInViewController:PFLogInViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,7 +24,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         super.viewDidAppear(false)
         
         // Create Login view controller
-        var logInViewController:PFLogInViewController = PFLogInViewController()
+        logInViewController = PFLogInViewController()
         logInViewController.delegate = self
         logInViewController.fields = (PFLogInFields.UsernameAndPassword
                                         | PFLogInFields.LogInButton
@@ -38,7 +40,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     }
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        
+
     }
 }
 
