@@ -10,13 +10,20 @@ import Foundation
 import Parse
 class Group {
     
-    static func addMember(groupID:String , userID:String){
-        let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userID)
-        let groupPointer = PFObject(withoutDataWithClassName: "Groups", objectId: groupID)
-        var members = PFObject(className: "Members")
-        members.setObject(userPointer, forKey: "Member")
-        members.setObject(groupPointer, forKey: "Group")
-        members.saveInBackground()
+    static func addMember(userObjectID:String, toGroup groupObjectID:String){
+        var query = PFQuery(className:"Group")
+        query.whereKey("objectId", equalTo: groupObjectID)
+        query.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                // results contains Member in group
+                for group in results as! [PFObject]{
+                    let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userObjectID)
+                    group.addObject(userPointer, forKey: "members")
+                    group.saveInBackground()
+                }
+            }
+        }
     }
     
     static func mkGroup(title:String, description:String, isPublic:Bool,
@@ -33,30 +40,23 @@ class Group {
             group.setObject(startDate, forKey: "Start")
             group.setObject(endDate, forKey: "End")
             group.addObject(userPointer, forKey: "members")
-    
+
             //Push that PFObject onto the database
             group.saveInBackground()
     }
-    static func removeMember(groupID:String , userID:String){
-        var member = PFQuery(className:"Members")
-        
-        member.whereKey("Member", equalTo: PFObject(withoutDataWithClassName:"_User", objectId: userID))
-        
-        var group = PFQuery(className:"Members")
-        group.whereKey("Group", equalTo: PFObject(withoutDataWithClassName: "Groups", objectId: groupID))
-        
-        var query = PFQuery.orQueryWithSubqueries([member, group])
+    static func removeMember(userObjectID:String, fromGroup groupObjectID:String){
+        var query = PFQuery(className:"Group")
+        query.whereKey("objectId", equalTo: groupObjectID)
         query.findObjectsInBackgroundWithBlock {
             (results: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 // results contains Member in group
-                for objects in results as! [PFObject]{
-                    objects.deleteInBackground()
-//                    objects.saveInBackground()
+                for group in results as! [PFObject]{
+                    let userPointer = PFObject(withoutDataWithClassName:"_User", objectId: userObjectID)
+                    group.removeObject(userPointer, forKey: "members")
+                    group.saveInBackground()
                 }
-                
             }
-            
         }
     }
 }
