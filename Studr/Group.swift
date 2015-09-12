@@ -16,13 +16,15 @@ class Group {
             (group: PFObject?, error: NSError?) -> Void in
             if error == nil && group != nil {
                 println(group)
+                var members = group?.objectForKey("Memebers")
+                println(members)
+                
             } else {
                 println(error)
             }
         }
-        var members = query["Members"] as Dictionary
-        println(members)
-        
-        
+                
     }
+    
+    
 }
