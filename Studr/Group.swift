@@ -9,22 +9,18 @@
 import Foundation
 import Parse
 class Group {
-    let CLASS_NAME = "Groups"
-    func bestDate(groupID : String){
-        var query = PFQuery(className: CLASS_NAME)
+    
+    func getMembers(groupID : String) -> [PFObject]{
+        var members = [PFObject]()
+        var query = PFQuery(className:"Groups")
         query.getObjectInBackgroundWithId(groupID) {
             (group: PFObject?, error: NSError?) -> Void in
-            if error == nil && group != nil {
-                println(group)
-                var members = group?.objectForKey("Memebers")
-                println(members)
-                
-            } else {
+            if error != nil {
                 println(error)
+            } else if let group = group {
+                members = group["Members"] as! [(PFObject)]
             }
         }
-                
+        return members
     }
-    
-    
 }
