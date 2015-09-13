@@ -41,7 +41,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         }
         
         // Create a GroupViewController object
-        self.groupViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Users")
+        self.groupViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Group")
         navigationController!.pushViewController(self.groupViewController, animated: false)
     }
     

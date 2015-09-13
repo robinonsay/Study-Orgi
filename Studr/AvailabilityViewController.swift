@@ -74,6 +74,8 @@ class AvailabilityViewController: UIViewController {
         //self.navigationController?.pushViewController(vc, animated: true)
         self.navigationController?.setViewControllers([vc, self], animated: false)
         self.navigationController?.popViewControllerAnimated(true)
+        
+        Database.setAvailability(dictionary)
     }
     
     
