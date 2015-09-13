@@ -13,8 +13,8 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
     
     var popoverController : UIPopoverController?
     
-    var requests = [PFObject]()
     var friends = [PFObject]()
+    var requests = [PFObject]()
     var users = [PFObject]()
     var allUsers = [[PFObject]]()
     // Current cell
@@ -47,7 +47,7 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         users.filter { element in
             !contains(self.requests, element)
         }
-        allUsers = [requests, friends, users]
+        allUsers = [friends, requests, users]
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,12 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row].objectForKey("userName") as? String
+        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row].objectForKey("username") as? String
+        
+        if(indexPath.section == 2){
+            var button = UIButton.buttonWithType(.ContactAdd) as! UIButton
+            cell.accessoryView = button;
+        }
         
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
@@ -99,18 +104,10 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
-        if (contains(self.selectedCells, indexPath)){
-            
-            cell!.accessoryType = UITableViewCellAccessoryType.None;
-            self.selectedCells = self.selectedCells.filter() { $0 !== indexPath }
-            
-        }else{
-            
-            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark;
-            self.selectedCells.append(indexPath)
-        }
+        var user = allUsers[indexPath.section][indexPath.row]
+        var userId = user.valueForKey("objectId") as! String
+        Database.requestFriend(userId)
         
-        print(self.selectedCells)
     }
     
     func backButtonTapped(sender : UIButton) {
