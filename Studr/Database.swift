@@ -201,16 +201,17 @@ class Database {
     static func requestFriend(userObjectID:String){
             var request = PFObject(className: "FriendRequests")
             var myID = PFUser.currentUser()?.objectId
-            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: myID), forKey: "Sender")
-            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: userObjectID), forKey: "Receiver")
-            request.setObject(false, forKey: "Accepted")
+            let fromUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: myID)
+            let toUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: userObjectID)
+            request.setObject(fromUserPointer, forKey: "fromUser")
+            request.setObject(toUserPointer, forKey: "toUser")
+            request.setObject("pending", forKey: "status")
             request.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 if (success) {
                     // The object has been saved.
-                    println("Success")
+                    println("Success friend request!")
                 } else {
                     // There was a problem, check error.description
-                    
                     println(error)
                 }
         }
@@ -239,19 +240,19 @@ class Database {
     }
     static func acceptFriend(userObjectID:String){
         var quereyRec = PFQuery(className: "FriendRequests")
-        quereyRec.whereKey("Receiver", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
+        quereyRec.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
         var quereySender = PFQuery(className: "FriendRequests")
-        quereySender.whereKey("Sender", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: userObjectID))
+        quereySender.whereKey("fromUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: userObjectID))
         
         var querey = PFQuery.orQueryWithSubqueries([quereyRec,quereySender])
         querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
             if error == nil{
                 for obj in results as![PFObject]{
-                    obj.setObject(true, forKey: "Accepted" )
+                    obj.setObject("accepted", forKey: "status" )
                     obj.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if (success) {
                             // The object has been saved.
-                            println("Success")
+                            println("Success full Friendship Accept!")
                         } else {
                             // There was a problem, check error.description
                             
