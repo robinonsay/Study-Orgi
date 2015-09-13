@@ -46,7 +46,6 @@ class Database {
         
     }
     
-   
     
     static func pickBestDate(groupID:String){
         var totals = [Int]()
@@ -150,7 +149,7 @@ class Database {
                 var res = result as! [PFObject]
                 for var i=0 ;i < res.count;++i{
                     resultant[i] = res[i].objectForKey("status") as! String
-                 }
+                }
             }else{
                 println(err)
             }
@@ -163,7 +162,7 @@ class Database {
             print("add")
             let userPointer = PFObject(withoutDataWithClassName:USER, objectId: creatorID)
             let group = PFObject(className: "Group")
-                
+            
             //Assign the properties of the group to the PFObject
             group.setObject(title, forKey: "Title")
             group.setObject(description, forKey: "Description")
@@ -173,31 +172,31 @@ class Database {
             group.setObject(endDate, forKey: "End")
             group.addObject(userPointer, forKey: "members")
             group.setObject(location, forKey: "Location")
-
+            
             //Push that PFObject onto the database
             var myID = ""
             group.save()
             group.fetch()
             
-//            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-//                if success{
-//                    
-//                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
-//                        if obj != nil && error == nil{
-//                            println(obj)
-//                            myID = obj!.objectId!
-//                            println("SUCESSSSSSSSS")
-//                            
-//                        }else{
-//                            print(error)
-//                            println(" ERRRORR in mkGroup")
-//                        }
-//                    }
-//                }else{
-//                    print(error)
-//                    println(" ERRRORin mkGroup")
-//                }
-//            }
+            //            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            //                if success{
+            //
+            //                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
+            //                        if obj != nil && error == nil{
+            //                            println(obj)
+            //                            myID = obj!.objectId!
+            //                            println("SUCESSSSSSSSS")
+            //
+            //                        }else{
+            //                            print(error)
+            //                            println(" ERRRORR in mkGroup")
+            //                        }
+            //                    }
+            //                }else{
+            //                    print(error)
+            //                    println(" ERRRORin mkGroup")
+            //                }
+            //            }
             
             
             myID = group.objectId!
@@ -226,9 +225,9 @@ class Database {
     static func requestFriend(userObjectID:String){
             var request = PFObject(className: "FriendRequests")
             var myID = PFUser.currentUser()?.objectId
-            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: myID), forKey: "Sender")
-            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: userObjectID), forKey: "Receiver")
-            request.setObject(false, forKey: "Accepted")
+            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: myID), forKey: "fromUser")
+            request.setObject(PFObject(withoutDataWithClassName: "_User", objectId: userObjectID), forKey: "toUser")
+            request.setObject("pending", forKey: "status")
             request.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 if (success) {
                     // The object has been saved.
@@ -264,15 +263,15 @@ class Database {
     }
     static func acceptFriend(userObjectID:String){
         var quereyRec = PFQuery(className: "FriendRequests")
-        quereyRec.whereKey("Receiver", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
+        quereyRec.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
         var quereySender = PFQuery(className: "FriendRequests")
-        quereySender.whereKey("Sender", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: userObjectID))
+        quereySender.whereKey("fromUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: userObjectID))
         
         var querey = PFQuery.orQueryWithSubqueries([quereyRec,quereySender])
         querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
             if error == nil{
                 for obj in results as![PFObject]{
-                    obj.setObject(true, forKey: "Accepted" )
+                    obj.setObject("accepted", forKey: "status" )
                     obj.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if (success) {
                             // The object has been saved.
