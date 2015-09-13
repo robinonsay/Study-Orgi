@@ -45,4 +45,10 @@ class FriendManagerTableViewController : PFQueryTableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var obj = objectAtIndexPath(indexPath)
+        var objId = obj?.valueForKey("objectId") as! String
+        Database.requestFriend(objId)
+    }
 }
