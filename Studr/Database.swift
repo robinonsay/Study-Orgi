@@ -11,7 +11,7 @@ import Parse
 
 class Database {
     static let USER = "_User"
-    
+    static var userGroups = [Group]()
     static func addMember(userObjectID:String, toGroup groupObjectID:String){
         var query = PFQuery(className:"Group")
         query.whereKey("objectId", equalTo: groupObjectID)
@@ -214,6 +214,28 @@ class Database {
                     println(error)
                 }
         }
+    }
+    static func getAllGroupsFromUser(){
+        var query = PFQuery(className: "Group")
+        query.whereKey("members", containsAllObjectsInArray: [PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId)])
+        
+        query.findObjectsInBackgroundWithBlock { (res:[AnyObject]?, err:NSError?) -> Void in
+            if err == nil{
+                if let res = res as? [PFObject] {
+                    for obj in res {
+                        var group = Group()
+                        group.groupID = obj.objectId!
+                        self.userGroups.append(group)
+                        
+                        
+                    }
+                }
+            }else{
+                println(err)
+            }
+        }
+        
+        
     }
     static func acceptFriend(userObjectID:String){
         var quereyRec = PFQuery(className: "FriendRequests")

@@ -11,10 +11,10 @@ import XLForm
 import Parse
 
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-    
+    var friends = [String]()
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
-    var friends = [PFObject]()
+    
     // Current cell
     var cell : UITableViewCell?
     
