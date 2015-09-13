@@ -18,6 +18,8 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //Database.requestFriend("q5qFQTyu0n")
+        //Database.acceptFriend("PLKREcfsg5")
         
     }
     

@@ -8,8 +8,10 @@
 
 import Foundation
 import Parse
+
 class Database {
     static let USER = "_User"
+    
     static func addMember(userObjectID:String, toGroup groupObjectID:String){
         var query = PFQuery(className:"Group")
         query.whereKey("objectId", equalTo: groupObjectID)
@@ -26,7 +28,7 @@ class Database {
         }
     }
     
-    static func setAvailability(userAvailability:[[NSDate:Int]]){
+    static func setAvailability(userAvailability:[Int]){
         var userAva = PFObject(className: "UserAvailability")
         var myID = PFUser.currentUser()?.objectId
         userAva.setObject(PFObject(withoutDataWithClassName: "_User", objectId: myID), forKey: "User")
@@ -43,6 +45,69 @@ class Database {
         }
         
     }
+    
+    
+    
+    static func pickBestDate(groupID:String)->[Int]{
+        var totals = [Int]()
+        totals = [0,0,0,0,0,0,0]
+        var groupQuery = PFQuery(className: "Group")
+        var membersInGroup:[PFObject]!
+        
+        
+        
+        groupQuery.getObjectInBackgroundWithId(groupID) {
+            (group: PFObject?, error: NSError?) -> Void in
+            
+            
+            if error == nil && group != nil {
+                
+                
+                println(group)
+                membersInGroup = group?.objectForKey("members") as! [PFObject]
+                
+                
+                
+                for obj in membersInGroup{
+                    
+                    var userQuery = PFQuery(className: "UserAvailbility")
+                    userQuery.whereKey("User", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: obj.objectId))
+                    
+                    
+                    userQuery.findObjectsInBackgroundWithBlock({
+                        (objects: [AnyObject]?, error: NSError?) -> Void in
+                        
+                        if error == nil {
+                            // The find succeeded.
+                            println("Successfully retrieved \(objects!.count) scores.")
+                            // Do something with the found objects
+                            
+                            
+                            if let objects = objects as? [PFObject] {
+                                for object in objects {
+                                    var avail:[Int] = object.objectForKey("Availability") as! [Int]
+                                    
+                                    for var i=0;i<7;++i{
+                                        totals[i]+=avail[i]
+                                    }
+                                }
+                            }
+                        } else {
+                            // Log details of the failure
+                            println("Error: \(error!) \(error!.userInfo!)")
+                        }
+                    })
+                }
+            } else {
+                println(error)
+            }
+        }
+        
+        
+        return totals
+        
+    }
+    
     static func getSomeFriends()->[PFObject]{
         var quereyRec = PFQuery(className: "FriendRequests")
         quereyRec.whereKey("Receiver", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
@@ -68,7 +133,7 @@ class Database {
 
     }
     static func mkGroup(title:String, description:String, isPublic:Bool,
-        startDate:NSDate, endDate:NSDate, location:String){
+        startDate:NSDate, endDate:NSDate, location:String)->String{
             var creatorID = PFUser.currentUser()?.objectId
             print("add")
             let userPointer = PFObject(withoutDataWithClassName:USER, objectId: creatorID)
@@ -85,7 +150,29 @@ class Database {
             group.setObject(location, forKey: "Location")
 
             //Push that PFObject onto the database
-            group.saveInBackground()
+            var myID = ""
+            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                if success{
+                    
+                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
+                        if obj != nil && error == nil{
+                            println(obj)
+                            myID = obj!.objectId!
+                            println("SUCESSSSSSSSS")
+                            
+                        }else{
+                            print(error)
+                            println(" ERRRORR in mkGroup")
+                        }
+                    }
+                }else{
+                    print(error)
+                    println(" ERRRORin mkGroup")
+                }
+            }
+            
+            println(group.objectId)
+            return myID
     }
     
     

@@ -136,7 +136,17 @@ class CreateGroupViewController: XLFormViewController {
             var location = dictionary[Tags.Title.rawValue] as! String
             //var access = dictionary[Tags.Title.rawValue] as! Bool
         
-        Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
+        var str = Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
+        var arr = [Int]()
+        for var i=0;i<7;++i{
+            arr.append(1)
+        }
+        Database.setAvailability(arr)
+        var tarr =  Database.pickBestDate(str)
+        
+        for i in tarr{
+            println(i)
+        }
         
         
         
