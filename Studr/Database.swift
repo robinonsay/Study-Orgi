@@ -93,8 +93,6 @@ class Database {
                 myDic.updateValue(totals[i], forKey: dates[i])
             }
             
-            print(myDic)
-            
             group?.setObject(myDic, forKey: "totalAvail")
             group?.saveInBackgroundWithBlock({ (b: Bool, err: NSError?) -> Void in
                 if b{

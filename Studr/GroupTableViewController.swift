@@ -44,7 +44,10 @@ class GroupTableViewController: PFQueryTableViewController {
         return cell!
     }
     
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var vc = DetailGroupViewController(group: self.objectAtIndexPath(indexPath)!)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

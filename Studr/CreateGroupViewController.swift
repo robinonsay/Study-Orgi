@@ -45,7 +45,7 @@ class CreateGroupViewController: XLFormViewController {
         var row : XLFormRowDescriptor
         
         form = XLFormDescriptor(title: "Group Settings")
-        form.assignFirstResponderOnShow = true
+        form.assignFirstResponderOnShow = false
         
         section = XLFormSectionDescriptor.formSectionWithTitle("Group Settings")
         section.footerTitle = ""

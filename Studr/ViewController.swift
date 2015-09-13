@@ -72,7 +72,7 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         self.dismissViewControllerAnimated(false, completion: nil)
         
         var informationTableViewController:InformationTableViewController = InformationTableViewController()
-        self.presentViewController(informationTableViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(informationTableViewController, animated: true)
         
     }
     

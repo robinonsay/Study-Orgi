@@ -12,7 +12,7 @@ import XLForm
 
 class DetailGroupViewController: XLFormViewController {
     
-    var group:PFObject = PFObject()
+    var group:PFObject = PFObject(className: "Group")
     
     // Form list
     private enum Tags : String {
@@ -25,12 +25,14 @@ class DetailGroupViewController: XLFormViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.group = PFObject(className: "Group")
         self.initializeForm()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
+        self.group = PFObject(className: "Group")
     }
     
     convenience init(group:PFObject) {
@@ -46,7 +48,7 @@ class DetailGroupViewController: XLFormViewController {
         var row : XLFormRowDescriptor
         
         form = XLFormDescriptor(title: group.valueForKey("Title") as? String)
-        form.assignFirstResponderOnShow = true
+        form.assignFirstResponderOnShow = false
         
         section = XLFormSectionDescriptor.formSectionWithTitle("")
         section.footerTitle = ""
@@ -68,10 +70,14 @@ class DetailGroupViewController: XLFormViewController {
         section.addFormRow(row)
         
         // Date
-        row = XLFormRowDescriptor(tag: Tags.Date.rawValue, rowType: XLFormRowDescriptorTypeDate, title: "Date")
-        var dateFormatter: NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-        //row.value = dateFormatter.dateFromString(group.valueForKey("KEY HERERERERERER"))
+        row = XLFormRowDescriptor(tag: Tags.Date.rawValue, rowType: XLFormRowDescriptorTypeText, title: "Date")
+        
+        if var a = group.objectForKey("bestDate") as? String{
+            row.value = a
+        } else {
+            row.value = "Choose Avalibility"
+        }
+        row.disabled = true
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
@@ -120,9 +126,10 @@ class DetailGroupViewController: XLFormViewController {
     func leaveTapped(sender: UIButton){
         
         // Leave Group Here
+        //Database.removeMember(PFUser.currentUser()?.objectId!, fromGroup: group.objectId!)
         
         // Move on
-        var vc:GroupTableViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Users")
+        var vc:GroupTableViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Group")
         //self.navigationController?.pushViewController(vc, animated: true)
         self.navigationController?.setViewControllers([vc, self], animated: false)
         self.navigationController?.popViewControllerAnimated(true)
