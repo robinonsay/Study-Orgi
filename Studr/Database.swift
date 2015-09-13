@@ -46,7 +46,7 @@ class Database {
         
     }
     
-   
+    
     
     static func pickBestDate(groupID:String)->[Int]{
         var totals = [Int]()
@@ -85,7 +85,7 @@ class Database {
             
             
         }
-
+        
         return totals
         
     }
@@ -96,7 +96,8 @@ class Database {
         status.whereKey("status", equalTo: "accepted")
         var users = [PFObject]()
         var query = PFQuery.orQueryWithSubqueries([friend,status])
-        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock {
+            (result:[AnyObject]?, err:NSError?) -> Void in
             if err == nil{
                 users = result as! [PFObject]
             }else{
@@ -124,7 +125,7 @@ class Database {
                 var res = result as! [PFObject]
                 for var i=0 ;i < res.count;++i{
                     resultant[i] = res[i].objectForKey("status") as! String
-                 }
+                }
             }else{
                 println(err)
             }
@@ -138,7 +139,7 @@ class Database {
             print("add")
             let userPointer = PFObject(withoutDataWithClassName:USER, objectId: creatorID)
             let group = PFObject(className: "Group")
-                
+            
             //Assign the properties of the group to the PFObject
             group.setObject(title, forKey: "Title")
             group.setObject(description, forKey: "Description")
@@ -148,31 +149,31 @@ class Database {
             group.setObject(endDate, forKey: "End")
             group.addObject(userPointer, forKey: "members")
             group.setObject(location, forKey: "Location")
-
+            
             //Push that PFObject onto the database
             var myID = ""
             group.save()
             group.fetch()
             
-//            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-//                if success{
-//                    
-//                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
-//                        if obj != nil && error == nil{
-//                            println(obj)
-//                            myID = obj!.objectId!
-//                            println("SUCESSSSSSSSS")
-//                            
-//                        }else{
-//                            print(error)
-//                            println(" ERRRORR in mkGroup")
-//                        }
-//                    }
-//                }else{
-//                    print(error)
-//                    println(" ERRRORin mkGroup")
-//                }
-//            }
+            //            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            //                if success{
+            //
+            //                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
+            //                        if obj != nil && error == nil{
+            //                            println(obj)
+            //                            myID = obj!.objectId!
+            //                            println("SUCESSSSSSSSS")
+            //
+            //                        }else{
+            //                            print(error)
+            //                            println(" ERRRORR in mkGroup")
+            //                        }
+            //                    }
+            //                }else{
+            //                    print(error)
+            //                    println(" ERRRORin mkGroup")
+            //                }
+            //            }
             
             
             myID = group.objectId!
@@ -199,21 +200,21 @@ class Database {
     }
     
     static func requestFriend(userObjectID:String){
-            var request = PFObject(className: "FriendRequests")
-            var myID = PFUser.currentUser()?.objectId
-            let fromUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: myID)
-            let toUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: userObjectID)
-            request.setObject(fromUserPointer, forKey: "fromUser")
-            request.setObject(toUserPointer, forKey: "toUser")
-            request.setObject("pending", forKey: "status")
-            request.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                if (success) {
-                    // The object has been saved.
-                    println("Success friend request!")
-                } else {
-                    // There was a problem, check error.description
-                    println(error)
-                }
+        var request = PFObject(className: "FriendRequests")
+        var myID = PFUser.currentUser()?.objectId
+        let fromUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: myID)
+        let toUserPointer = PFObject(withoutDataWithClassName: "_User", objectId: userObjectID)
+        request.setObject(fromUserPointer, forKey: "fromUser")
+        request.setObject(toUserPointer, forKey: "toUser")
+        request.setObject("pending", forKey: "status")
+        request.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+                println("Success friend request!")
+            } else {
+                // There was a problem, check error.description
+                println(error)
+            }
         }
     }
     static func getAllGroupsFromUser(){
