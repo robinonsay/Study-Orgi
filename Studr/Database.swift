@@ -116,15 +116,10 @@ class Database {
         friend.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId))
         var status = PFQuery(className: "FriendRequests")
         status.whereKey("status", equalTo: "accepted")
-        var users = [PFObject]()
+
         var query = PFQuery.orQueryWithSubqueries([friend,status])
-        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
-            if err == nil{
-                users = result as! [PFObject]
-            }else{
-                println(err)
-            }
-        }
+        var users = query.findObjects() as! [PFObject]
+        
         return users
     }
     
