@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UISearchDisplayDelegate{
     
     var popoverController : UIPopoverController?
     
-    var requests = [String]()
-    var friends = [String]()
-    var users = [String]()
-    var allUsers = [[String]]()
+    var requests = [PFObject]()
+    var friends = [PFObject]()
+    var users = [PFObject]()
+    var allUsers = [[PFObject]]()
     // Current cell
     var cell : UITableViewCell?
     
@@ -23,35 +24,32 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
     var selectedCells = [NSIndexPath]()
     
     override init(style: UITableViewStyle) {
-        super.init(style: style);
-        friends = Database.getAcceptedFriends()
-        
+        super.init(style: style)
+        initialize()
     }
     
     override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        friends = Database.getAcceptedFriends()
+        initialize()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    func initialize(){
         friends = Database.getAcceptedFriends()
+        users = Database.getAllUsers()
+        requests = users.filter { element in
+            contains(self.friends, element)
+        }
+        users.filter { element in
+            !contains(self.requests, element)
+        }
+        allUsers = [requests, friends, users]
     }
-    /*
-    self.filteredCandies = self.candies.filter({( candy: Candy) -> Bool in
-    let categoryMatch = (scope == "All") || (candy.category == scope)
-    let stringMatch = candy.name.rangeOfString(searchText)
-    return categoryMatch && (stringMatch != nil)
-    })
-    */
-    func filterContentForSearchText(searchText: String) {
-        // Filter the array using the filter method
-        self.friends = self.friends.filter({( friend: String) -> Bool in
-            let categoryMatch = (scope == "All") || (friends.category == scope)
-            let stringMatch = friends.name.rangeOfString(searchText)
-            return categoryMatch && (stringMatch != nil)
-        })
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,7 +80,7 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row]
+        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row].objectForKey("userName") as? String
         
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)

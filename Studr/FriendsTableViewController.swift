@@ -8,12 +8,13 @@
 
 import UIKit
 import XLForm
+import Parse
 
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
     
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
-    var friends = [String]()
+    var friends = [PFObject]()
     // Current cell
     var cell : UITableViewCell?
     
@@ -61,7 +62,7 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = friends[indexPath.row]
+        cell.textLabel!.text = friends[indexPath.row].objectForKey("userName") as? String
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
         cell.selectedBackgroundView = view
