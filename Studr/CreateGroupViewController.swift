@@ -11,7 +11,7 @@ import Parse
 import XLForm
 
 class CreateGroupViewController: XLFormViewController {
-    var groupId = ""
+    
     // Form list
     private enum Tags : String {
         case Title = "title"
@@ -61,7 +61,7 @@ class CreateGroupViewController: XLFormViewController {
         
         // Description
         row = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView)
-        row.required = true
+        row.required = false
         row.cellConfigAtConfigure["textView.placeholder"] = "Description"
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
@@ -69,12 +69,13 @@ class CreateGroupViewController: XLFormViewController {
         // Locaiton
         row = XLFormRowDescriptor(tag: Tags.Location.rawValue, rowType: XLFormRowDescriptorTypeText)
         row.cellConfigAtConfigure["textField.placeholder"] = "Location"
+        row.required = true
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
         // Private
         row = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: "Private")
-        row.required = true
+        row.required = false
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
@@ -99,7 +100,6 @@ class CreateGroupViewController: XLFormViewController {
         
         //Submit
         row = XLFormRowDescriptor(tag: Tags.Submit.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Submit")
-        row.required = true
         row.cellConfig["backgroundColor"] = UIColorFromHex(0x13EB91, alpha: 1.0)
         row.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
         row.action.formSelector = "submitTapped:";
@@ -123,20 +123,12 @@ class CreateGroupViewController: XLFormViewController {
         
         // Dictionary of results
         var dictionary:Dictionary = self.formValues()
-        print(dictionary)
         
         // Store in database here
-        var title = dictionary[Tags.Title.rawValue] as! String
-        var description = dictionary[Tags.Title.rawValue] as! String
-        var location = dictionary[Tags.Title.rawValue] as! String
-        var `private` = dictionary[Tags.Title.rawValue] as! Bool
         
-        groupId = Database.mkGroup(title, description: description, isPublic: `private`, startDate: NSDate(), endDate: NSDate(), location: location)
-        
-        //var tarr =  Database.pickBestDate(str)
-        
-        
-
+        // Move on
+        var a: AvailabilityViewController = AvailabilityViewController()
+        navigationController?.pushViewController(a, animated: true)
         
     }
     

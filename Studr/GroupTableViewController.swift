@@ -37,6 +37,7 @@ class GroupTableViewController: PFQueryTableViewController {
         
         var createGroupViewController: CreateGroupViewController = CreateGroupViewController()
         navigationController?.pushViewController(createGroupViewController, animated: true)
+    
     }
 }
 
