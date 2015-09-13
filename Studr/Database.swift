@@ -46,10 +46,7 @@ class Database {
         
     }
     
-    static func getUsersFromGroup(groupID:String){
-        
-        
-    }
+   
     
     static func pickBestDate(groupID:String)->[Int]{
         var totals = [Int]()
@@ -92,7 +89,6 @@ class Database {
         return totals
         
     }
-    
     static func getAcceptedFriends()->[String]{
         var accept = "accepted"
         var friend = PFQuery(className: "FriendRequests")
@@ -101,6 +97,40 @@ class Database {
         status.whereKey("status", equalTo: accept)
         var resultant = [String]()
         var query = PFQuery.orQueryWithSubqueries([friend,status])
+        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
+            if err == nil{
+                var res = result as! [PFObject]
+                for var i=0 ;i < res.count;++i{
+                    resultant[i] = res[i].objectForKey("status") as! String
+                }
+            }else{
+                println(err)
+            }
+        }
+        return resultant
+    }
+    static func getAllUsers()->[String]{
+        
+        var resultant = [String]()
+        var query = PFQuery(className: "_User")
+        query.whereKey("username", notEqualTo: "")
+        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
+            if err == nil{
+                var res = result as! [PFObject]
+                for var i=0 ;i < res.count;++i{
+                    resultant[i] = res[i].objectForKey("username") as! String
+                }
+            }else{
+                println(err)
+            }
+        }
+        return resultant
+    }
+    static func getAllFriends()->[String]{
+        var accept = "accepted"
+        var resultant = [String]()
+        var query = PFQuery(className: "FriendRequests")
+        query.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId))
         query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
             if err == nil{
                 var res = result as! [PFObject]
