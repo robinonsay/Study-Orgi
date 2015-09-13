@@ -64,12 +64,18 @@ class Database {
         membersInGroup = group?.objectForKey("members") as! [PFObject]
         
         for obj in membersInGroup{
-            println(obj.objectId!+" THIS IS OBJ ID")
-            var userQuery = PFQuery(className: "UserAvailbility")
-            userQuery.whereKey("User", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: obj.objectId))
+            var id:String = obj.objectId!
+            println(id)
+            print(" THIS IS OBJ ID\n\n")
+            var userQuery = PFQuery(className: "UserAvailability")
+            userQuery.whereKey("User", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: id))
+            
+            
             
             var objects = userQuery.findObjects() as! [PFObject]
-            println("\n\n\n\n\n"+objects.count)
+            print("\n\n\n\n\n")
+            print(objects.count)
+            println()
             
             for object in objects {
                 var avail:[Int] = object.objectForKey("Availability") as! [Int]

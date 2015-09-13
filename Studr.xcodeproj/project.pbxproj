@@ -31,9 +31,10 @@
 		030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */; };
 		030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */; };
 		030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72581BA4BC52007F7200 /* GroupTableViewController.swift */; };
-		030C725D1BA4C91C007F7200 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C725C1BA4C91C007F7200 /* LoginViewController.swift */; };
-		030C725F1BA4D1AC007F7200 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */; };
-		030C72611BA4E980007F7200 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72601BA4E980007F7200 /* SignUpViewController.swift */; };
+		CC8113261BA5099B00D83477 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8113251BA5099B00D83477 /* Database.swift */; };
+		CC8113281BA509DB00D83477 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8113271BA509DB00D83477 /* InformationTableViewController.swift */; };
+		CC81132A1BA50A0100D83477 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8113291BA50A0100D83477 /* LoginViewController.swift */; };
+		CC81132C1BA50A1000D83477 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC81132B1BA50A1000D83477 /* SignUpViewController.swift */; };
 		FB272AAB61975E9151E5033C /* Pods_Studr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661CC81EAD296B5D2687976 /* Pods_Studr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -76,12 +77,13 @@
 		030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		030C72581BA4BC52007F7200 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
-		030C725C1BA4C91C007F7200 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
-		030C72601BA4E980007F7200 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5C10A888ACB9DEF36F061F5F /* Pods-Studr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.release.xcconfig"; sourceTree = "<group>"; };
 		7661CC81EAD296B5D2687976 /* Pods_Studr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC035CF6D61E01DCF33C067C /* Pods-Studr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.debug.xcconfig"; sourceTree = "<group>"; };
+		CC8113251BA5099B00D83477 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CC8113271BA509DB00D83477 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
+		CC8113291BA50A0100D83477 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../../../../Downloads/Studr/Studr/LoginViewController.swift; sourceTree = "<group>"; };
+		CC81132B1BA50A1000D83477 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,9 +149,10 @@
 				030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */,
 				030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */,
 				030C72581BA4BC52007F7200 /* GroupTableViewController.swift */,
-				030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */,
-				030C725C1BA4C91C007F7200 /* LoginViewController.swift */,
-				030C72601BA4E980007F7200 /* SignUpViewController.swift */,
+				CC8113271BA509DB00D83477 /* InformationTableViewController.swift */,
+				CC8113251BA5099B00D83477 /* Database.swift */,
+				CC8113291BA50A0100D83477 /* LoginViewController.swift */,
+				CC81132B1BA50A1000D83477 /* SignUpViewController.swift */,
 				030C71F71BA4B6FB007F7200 /* Main.storyboard */,
 				030C71FA1BA4B6FB007F7200 /* Images.xcassets */,
 				030C71FC1BA4B6FB007F7200 /* LaunchScreen.xib */,
@@ -373,13 +376,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				030C725D1BA4C91C007F7200 /* LoginViewController.swift in Sources */,
-				030C725F1BA4D1AC007F7200 /* InformationTableViewController.swift in Sources */,
-				030C72611BA4E980007F7200 /* SignUpViewController.swift in Sources */,
+				CC8113281BA509DB00D83477 /* InformationTableViewController.swift in Sources */,
 				030C71F61BA4B6FB007F7200 /* ViewController.swift in Sources */,
 				030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */,
+				CC81132C1BA50A1000D83477 /* SignUpViewController.swift in Sources */,
 				030C71F41BA4B6FB007F7200 /* AppDelegate.swift in Sources */,
+				CC8113261BA5099B00D83477 /* Database.swift in Sources */,
 				030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */,
+				CC81132A1BA50A0100D83477 /* LoginViewController.swift in Sources */,
 				030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

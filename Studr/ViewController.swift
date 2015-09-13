@@ -20,6 +20,11 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         // Do any additional setup after loading the view, typically from a nib.
         //Database.requestFriend("q5qFQTyu0n")
         //Database.acceptFriend("PLKREcfsg5")
+        var arr = [Int]()
+        for var i=0;i<7;++i{
+            arr.append(1)
+        }
+        Database.setAvailability(arr)
         
     }
     

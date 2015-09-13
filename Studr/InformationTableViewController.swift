@@ -1,5 +1,5 @@
 //
-//  JHCreateGroupViewController.swift
+//  InformationTableViewController.swift
 //  Studr
 //
 //  Created by Joshua Herkness on 9/12/15.
@@ -11,15 +11,13 @@ import Parse
 import ParseUI
 import XLForm
 
-class CreateGroupViewController: XLFormViewController {
+class InformationTableViewController: XLFormViewController {
     
     private enum Tags : String {
-        case Title = "title"
-        case Description = "description"
-        case Location = "location"
-        case Access = "access"
-        case Private = "private"
-        case Members = "members"
+        case First = "first"
+        case Last = "last"
+        case School = "school"
+        case Major = "major"
         case Submit = "submit"
     }
     
@@ -44,57 +42,43 @@ class CreateGroupViewController: XLFormViewController {
         var section : XLFormSectionDescriptor
         var row : XLFormRowDescriptor
         
-        form = XLFormDescriptor(title: "Group Settings")
+        form = XLFormDescriptor(title: "About")
         form.assignFirstResponderOnShow = true
         
-        section = XLFormSectionDescriptor.formSectionWithTitle("Group Settings")
-        section.footerTitle = "Created at MHacks"
+        section = XLFormSectionDescriptor.formSectionWithTitle("About")
+        section.footerTitle = ""
         form.addFormSection(section)
         
-        
-        // Title
-        row = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
+        // First
+        row = XLFormRowDescriptor(tag: Tags.First.rawValue, rowType: XLFormRowDescriptorTypeText)
         row.required = true
-        row.cellConfigAtConfigure["textField.placeholder"] = "Title"
+        row.cellConfigAtConfigure["textField.placeholder"] = "First Name"
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
-        // Description
-        row = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView)
+        // Last
+        row = XLFormRowDescriptor(tag: Tags.Last.rawValue, rowType: XLFormRowDescriptorTypeText)
         row.required = true
-        row.cellConfigAtConfigure["textView.placeholder"] = "Description"
+        row.cellConfigAtConfigure["textField.placeholder"] = "Last Name"
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
-        // Locaiton
-        row = XLFormRowDescriptor(tag: Tags.Location.rawValue, rowType: XLFormRowDescriptorTypeText)
-        row.cellConfigAtConfigure["textField.placeholder"] = "Location"
+        // School
+        row = XLFormRowDescriptor(tag: Tags.School.rawValue, rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "School"
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
-        // Private
-        row = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: "Private")
-        row.required = true
+        // Major
+        row = XLFormRowDescriptor(tag: Tags.Major.rawValue, rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "Major"
         row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
         section.addFormRow(row)
         
-        // Members
-        row = XLFormRowDescriptor(tag: Tags.Members.rawValue, rowType: XLFormRowDescriptorTypeSelectorPush, title: "Add Members")
-        row.required = false
-        row.cellConfig["self.tintColor"] = UIColorFromHex(0xF68E20, alpha: 1.0)
-        row.action.viewControllerClass = FriendsTableViewController.self
-        section.addFormRow(row)
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            // Selector PopOver
-            row = XLFormRowDescriptor(tag: "selectorUserPopover", rowType:XLFormRowDescriptorTypeSelectorPopover, title:"Members")
-            row.action.viewControllerClass = FriendsTableViewController.self
-            section.addFormRow(row)
-        }
         
         // New Section
         section = XLFormSectionDescriptor.formSectionWithTitle("")
-        //section.footerTitle = "Made with Love"
+        section.footerTitle = "Carfted with ♥ at MHAcks"
         form.addFormSection(section)
         
         //Submit
@@ -114,10 +98,6 @@ class CreateGroupViewController: XLFormViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-    
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -131,21 +111,19 @@ class CreateGroupViewController: XLFormViewController {
         
         // Store in database here
         
-            var title = dictionary[Tags.Title.rawValue] as! String
-            var description = dictionary[Tags.Title.rawValue] as! String
-            var location = dictionary[Tags.Title.rawValue] as! String
-            //var access = dictionary[Tags.Title.rawValue] as! Bool
         
-        var str = Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
-        
-        var tarr =  Database.pickBestDate(str)
-        
-        for i in tarr{
-            println(i)
+        // Present Login View Controller if your not signed in
+        if PFUser.currentUser() == nil {
+            var loginViewController: LoginViewController = LoginViewController()
+            
+            loginViewController.fields = (PFLogInFields.UsernameAndPassword
+                | PFLogInFields.LogInButton
+                | PFLogInFields.SignUpButton
+                | PFLogInFields.PasswordForgotten)
+            self.presentViewController(loginViewController, animated: true, completion: nil)
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        
-        
     }
     
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
