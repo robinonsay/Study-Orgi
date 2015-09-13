@@ -1,5 +1,5 @@
 //
-//  JHGroupTableViewController
+//  GroupTableViewController.swift
 //  Studr
 //
 //  Created by Robin Onsay on 9/11/15.
@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ParseUI
+import XLForm
 
 class GroupTableViewController: PFQueryTableViewController {
     

@@ -12,50 +12,37 @@ import ParseUI
 
 class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
     
-    var logInViewController: PFLogInViewController!
+    var logInViewController: LogInViewController!
+    var signUpViewController: SignUpViewController!
     var groupViewController: GroupTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //Database.requestFriend("q5qFQTyu0n")
-        //Database.acceptFriend("PLKREcfsg5")
-        var arr = [Int]()
-        for var i=0;i<7;++i{
-            arr.append(1)
-        }
-        Database.setAvailability(arr)
         
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(false)
         
-        PFUser.logOut()
-        
-        // If there is currently no user logged in, promt the user to login
+        // Promt the user to log in if they havent already        
         if (PFUser.currentUser() == nil) {
             // Create Login view controller
-            self.logInViewController = PFLogInViewController()
+            self.logInViewController = LogInViewController()
             self.logInViewController.delegate = self
-            self.logInViewController.fields = (PFLogInFields.UsernameAndPassword
-                | PFLogInFields.LogInButton
-                | PFLogInFields.SignUpButton
-                | PFLogInFields.PasswordForgotten)
-            self.logInViewController.emailAsUsername = true
+            self.logInViewController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton
+                | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten)
+            //Create sign up view controller
+            self.signUpViewController = SignUpViewController()
+            self.signUpViewController.delegate = self
+            self.logInViewController.signUpController = signUpViewController
             
-            self.presentViewController(logInViewController, animated:true, completion: nil)
+            // Present login view controller
+            self.presentViewController(logInViewController, animated:false, completion: nil)
         }
         
         // Create a GroupViewController object
         self.groupViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Users")
-        
         navigationController!.pushViewController(self.groupViewController, animated: false)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Parse Login
@@ -67,18 +54,14 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         }else {
             return false
         }
-        
-        
     }
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func logInViewControllerDidCancelLogIn(logInController: PFLogInViewController) {
-        
+        self.presentViewController(self.logInViewController, animated: true, completion: nil)
     }
     
     
@@ -86,20 +69,26 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
         
-        self.presentViewController(self.logInViewController, animated: true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
+        
+        var informationTableViewController:InformationTableViewController = InformationTableViewController()
+        self.presentViewController(informationTableViewController, animated: true, completion: nil)
         
     }
     
-    /*
     func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
-    
-    println("FAiled to sign up...")
-    
+        // Try again
+        self.presentViewController(self.signUpViewController, animated: true, completion: nil)
     }
-    */
+
     
     func addTapped(sender:UIButton) {
         print("Hello")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }
 

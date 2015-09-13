@@ -13,6 +13,7 @@ import XLForm
 
 class InformationTableViewController: XLFormViewController {
     
+    // Form objects
     private enum Tags : String {
         case First = "first"
         case Last = "last"
@@ -95,6 +96,7 @@ class InformationTableViewController: XLFormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Aditional setup here
         
     }
     
@@ -112,20 +114,25 @@ class InformationTableViewController: XLFormViewController {
         // Store in database here
         
         
-        // Present Login View Controller if your not signed in
+        // If the user is not already signed in, prompt them to sign in
         if PFUser.currentUser() == nil {
-            var loginViewController: LoginViewController = LoginViewController()
+            
+            var loginViewController: LogInViewController = LogInViewController()
             
             loginViewController.fields = (PFLogInFields.UsernameAndPassword
                 | PFLogInFields.LogInButton
                 | PFLogInFields.SignUpButton
                 | PFLogInFields.PasswordForgotten)
+            
             self.presentViewController(loginViewController, animated: true, completion: nil)
+            
         } else {
+            
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
+    // Generate UIColor from a HEX value
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0

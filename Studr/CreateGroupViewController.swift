@@ -8,11 +8,11 @@
 
 import UIKit
 import Parse
-import ParseUI
 import XLForm
 
 class CreateGroupViewController: XLFormViewController {
     
+    // Form list
     private enum Tags : String {
         case Title = "title"
         case Description = "description"
@@ -48,7 +48,7 @@ class CreateGroupViewController: XLFormViewController {
         form.assignFirstResponderOnShow = true
         
         section = XLFormSectionDescriptor.formSectionWithTitle("Group Settings")
-        section.footerTitle = "Created at MHacks"
+        section.footerTitle = ""
         form.addFormSection(section)
         
         
@@ -94,7 +94,7 @@ class CreateGroupViewController: XLFormViewController {
         
         // New Section
         section = XLFormSectionDescriptor.formSectionWithTitle("")
-        //section.footerTitle = "Made with Love"
+        section.footerTitle = "Carfted with ♥ at MHAcks"
         form.addFormSection(section)
         
         //Submit
@@ -114,10 +114,6 @@ class CreateGroupViewController: XLFormViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-    
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,11 +126,10 @@ class CreateGroupViewController: XLFormViewController {
         print(dictionary)
         
         // Store in database here
-        
-            var title = dictionary[Tags.Title.rawValue] as! String
-            var description = dictionary[Tags.Title.rawValue] as! String
-            var location = dictionary[Tags.Title.rawValue] as! String
-            //var access = dictionary[Tags.Title.rawValue] as! Bool
+        var title = dictionary[Tags.Title.rawValue] as! String
+        var description = dictionary[Tags.Title.rawValue] as! String
+        var location = dictionary[Tags.Title.rawValue] as! String
+        //var access = dictionary[Tags.Title.rawValue] as! Bool
         
         var str = Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
         
@@ -143,11 +138,11 @@ class CreateGroupViewController: XLFormViewController {
         for i in tarr{
             println(i)
         }
-        
-        
+
         
     }
     
+    // Generate UIColor from HEX value
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0

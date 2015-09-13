@@ -9,20 +9,16 @@
 import UIKit
 import XLForm
 
-
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-    
-    
     
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
     
+    // Current cell
     var cell : UITableViewCell?
     
+    // Array of selected cells ( Index Path )
     var selectedCells = [NSIndexPath]()
-    
-    private let kUserCellIdentifier = "cell"
-    
     
     override init(style: UITableViewStyle) {
         super.init(style: style);
@@ -39,9 +35,10 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add a back button
         self.navigationItem.leftBarButtonItem=UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButtonTapped:")
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.kUserCellIdentifier)
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
         
     }
@@ -49,16 +46,18 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     // MARK: UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 1 // Should always be 1 in this case
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Calculate number of cells in the section
+        // Calculate number of friends from the database
         return 10
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(self.kUserCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        
         cell.textLabel!.text = "\(indexPath.row)"
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
@@ -117,6 +116,7 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
         }
     }
     
+    // Generate UIColor from a HEX value
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
