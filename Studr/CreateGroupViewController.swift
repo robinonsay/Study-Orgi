@@ -11,7 +11,7 @@ import Parse
 import XLForm
 
 class CreateGroupViewController: XLFormViewController {
-    
+    var groupId = ""
     // Form list
     private enum Tags : String {
         case Title = "title"
@@ -129,11 +129,11 @@ class CreateGroupViewController: XLFormViewController {
         var title = dictionary[Tags.Title.rawValue] as! String
         var description = dictionary[Tags.Title.rawValue] as! String
         var location = dictionary[Tags.Title.rawValue] as! String
-        //var access = dictionary[Tags.Title.rawValue] as! Bool
+        var `private` = dictionary[Tags.Title.rawValue] as! Bool
         
-        var str = Database.mkGroup(title, description: description, isPublic: true, startDate: NSDate(), endDate: NSDate(), location: location)
+        groupId = Database.mkGroup(title, description: description, isPublic: `private`, startDate: NSDate(), endDate: NSDate(), location: location)
         
-        var tarr =  Database.pickBestDate(str)
+        //var tarr =  Database.pickBestDate(str)
         
         
 

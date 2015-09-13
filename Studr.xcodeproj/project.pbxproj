@@ -147,6 +147,7 @@
 				030C72311BA4B95F007F7200 /* Frameworks */,
 				030C71F31BA4B6FB007F7200 /* AppDelegate.swift */,
 				030C71F51BA4B6FB007F7200 /* ViewController.swift */,
+				CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */,
 				CC59107C1BA517FD00AB51E6 /* Database.swift */,
 				030C725C1BA4C91C007F7200 /* LogInViewController.swift */,
 				030C72601BA4E980007F7200 /* SignUpViewController.swift */,
@@ -194,7 +195,6 @@
 				030C72541BA4BAE2007F7200 /* ParseUI.framework */,
 				030C72321BA4B9BF007F7200 /* Bolts.framework */,
 				030C72331BA4B9BF007F7200 /* Parse.framework */,
-				CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
