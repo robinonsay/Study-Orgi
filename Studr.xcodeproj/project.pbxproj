@@ -34,6 +34,7 @@
 		030C725F1BA4D1AC007F7200 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */; };
 		030C72611BA4E980007F7200 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72601BA4E980007F7200 /* SignUpViewController.swift */; };
 		03EBBE491BA4FA6000D328FF /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EBBE481BA4FA6000D328FF /* AvailabilityViewController.swift */; };
+		7C2356DA1BA551BE004AD5EA /* FriendManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */; };
 		CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59107C1BA517FD00AB51E6 /* Database.swift */; };
 		CC59107F1BA5217800AB51E6 /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */; };
 		FB272AAB61975E9151E5033C /* Pods_Studr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661CC81EAD296B5D2687976 /* Pods_Studr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -83,6 +84,7 @@
 		03EBBE481BA4FA6000D328FF /* AvailabilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityViewController.swift; sourceTree = "<group>"; };
 		5C10A888ACB9DEF36F061F5F /* Pods-Studr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.release.xcconfig"; sourceTree = "<group>"; };
 		7661CC81EAD296B5D2687976 /* Pods_Studr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManagerTableViewController.swift; sourceTree = "<group>"; };
 		BC035CF6D61E01DCF33C067C /* Pods-Studr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.debug.xcconfig"; sourceTree = "<group>"; };
 		CC59107C1BA517FD00AB51E6 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				030C71F31BA4B6FB007F7200 /* AppDelegate.swift */,
 				030C71F51BA4B6FB007F7200 /* ViewController.swift */,
 				CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */,
+				7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */,
 				CC59107C1BA517FD00AB51E6 /* Database.swift */,
 				030C725C1BA4C91C007F7200 /* LogInViewController.swift */,
 				030C72601BA4E980007F7200 /* SignUpViewController.swift */,
@@ -395,6 +398,7 @@
 				030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */,
 				CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */,
 				030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */,
+				7C2356DA1BA551BE004AD5EA /* FriendManagerTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

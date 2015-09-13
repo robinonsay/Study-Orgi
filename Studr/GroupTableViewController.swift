@@ -42,7 +42,7 @@ class GroupTableViewController: PFQueryTableViewController {
     }
     func friendsTapped(sender:UIButton) {
         
-        var friendTableViewController: FriendTableViewController = FriendTableViewController()
+        var friendTableViewController: FriendManagerTableViewController = FriendManagerTableViewController()
         navigationController?.pushViewController(friendTableViewController, animated: true)
     }
 }

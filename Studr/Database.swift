@@ -110,15 +110,6 @@ class Database {
     static func getAllUsers()->[PFObject]{
         var users = [PFObject]()
         var query = PFQuery(className:"_User")
-//        query.findObjectsInBackgroundWithBlock {
-//            (objects: [AnyObject]?, error: NSError?) -> Void in
-//            if error == nil{
-//                users = objects as! [PFObject]
-//            }else{
-//                //Handle error
-//                print(error)
-//            }
-//        }
         users = query.findObjects() as! [PFObject]
         print(users.count)
         return users
@@ -138,6 +129,7 @@ class Database {
                 println(err)
             }
         }
+        print(resultant)
         return resultant
     }
     static func mkGroup(title:String, description:String, isPublic:Bool,

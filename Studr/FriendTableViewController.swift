@@ -108,6 +108,7 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         var userId = user.valueForKey("objectId") as! String
         Database.requestFriend(userId)
         
+        self.tableView.reloadData()
     }
     
     func backButtonTapped(sender : UIButton) {
