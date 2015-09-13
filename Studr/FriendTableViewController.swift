@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UISearchDisplayDelegate{
     
     var popoverController : UIPopoverController?
     
-    var requests = [String]()
-    var friends = [String]()
-    var users = [String]()
-    var allUsers = [[String]]()
+    var friends = [PFObject]()
+    var requests = [PFObject]()
+    var users = [PFObject]()
+    var allUsers = [[PFObject]]()
     // Current cell
     var cell : UITableViewCell?
     
@@ -23,19 +24,18 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
     var selectedCells = [NSIndexPath]()
     
     override init(style: UITableViewStyle) {
-        super.init(style: style);
-        friends = Database.getAcceptedFriends()
-        
+        super.init(style: style)
+        initialize()
     }
     
     override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        friends = Database.getAcceptedFriends()
+        initialize()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        friends = Database.getAcceptedFriends()
+        initialize()
     }
     /*
     self.filteredCandies = self.candies.filter({( candy: Candy) -> Bool in
@@ -82,7 +82,12 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row]
+        cell.textLabel!.text = allUsers[indexPath.section][indexPath.row].objectForKey("username") as? String
+        
+        if(indexPath.section == 2){
+            var button = UIButton.buttonWithType(.ContactAdd) as! UIButton
+            cell.accessoryView = button;
+        }
         
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
@@ -101,18 +106,10 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
-        if (contains(self.selectedCells, indexPath)){
-            
-            cell!.accessoryType = UITableViewCellAccessoryType.None;
-            self.selectedCells = self.selectedCells.filter() { $0 !== indexPath }
-            
-        }else{
-            
-            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark;
-            self.selectedCells.append(indexPath)
-        }
+        var user = allUsers[indexPath.section][indexPath.row]
+        var userId = user.valueForKey("objectId") as! String
+        Database.requestFriend(userId)
         
-        print(self.selectedCells)
     }
     
     func backButtonTapped(sender : UIButton) {

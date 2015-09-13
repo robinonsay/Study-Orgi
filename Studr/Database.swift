@@ -89,42 +89,39 @@ class Database {
         return totals
         
     }
-    static func getAcceptedFriends()->[String]{
-        var accept = "accepted"
+    static func getAcceptedFriends()->[PFObject]{
         var friend = PFQuery(className: "FriendRequests")
         friend.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId))
         var status = PFQuery(className: "FriendRequests")
-        status.whereKey("status", equalTo: accept)
-        var resultant = [String]()
+        status.whereKey("status", equalTo: "accepted")
+        var users = [PFObject]()
         var query = PFQuery.orQueryWithSubqueries([friend,status])
         query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
             if err == nil{
-                var res = result as! [PFObject]
-                for var i=0 ;i < res.count;++i{
-                    resultant[i] = res[i].objectForKey("status") as! String
-                }
+                users = result as! [PFObject]
             }else{
                 println(err)
             }
         }
-        return resultant
+        return users
     }
-    static func getAllUsers()->[String]{
-        
-        var resultant = [String]()
-        var query = PFQuery(className: "_User")
-        query.whereKey("username", notEqualTo: "")
-        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
-            if err == nil{
-                var res = result as! [PFObject]
-                for var i=0 ;i < res.count;++i{
-                    resultant[i] = res[i].objectForKey("username") as! String
-                }
-            }else{
-                println(err)
-            }
-        }
-        return resultant
+    
+    
+    static func getAllUsers()->[PFObject]{
+        var users = [PFObject]()
+        var query = PFQuery(className:"_User")
+//        query.findObjectsInBackgroundWithBlock {
+//            (objects: [AnyObject]?, error: NSError?) -> Void in
+//            if error == nil{
+//                users = objects as! [PFObject]
+//            }else{
+//                //Handle error
+//                print(error)
+//            }
+//        }
+        users = query.findObjects() as! [PFObject]
+        print(users.count)
+        return users
     }
     static func getAllFriends()->[String]{
         var accept = "accepted"
