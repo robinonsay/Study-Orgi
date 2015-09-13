@@ -28,13 +28,13 @@
 		030C72551BA4BAE2007F7200 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030C72541BA4BAE2007F7200 /* ParseUI.framework */; };
 		030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */; };
 		030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */; };
-		030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72581BA4BC52007F7200 /* GroupTableViewController.swift */; };
 		030C725D1BA4C91C007F7200 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C725C1BA4C91C007F7200 /* LogInViewController.swift */; };
 		030C725F1BA4D1AC007F7200 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */; };
 		030C72611BA4E980007F7200 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030C72601BA4E980007F7200 /* SignUpViewController.swift */; };
 		03EBBE491BA4FA6000D328FF /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EBBE481BA4FA6000D328FF /* AvailabilityViewController.swift */; };
 		7C2356DA1BA551BE004AD5EA /* FriendManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */; };
-		CC4760111BA58ABB00206239 /* DetailGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4760101BA58ABB00206239 /* DetailGroupViewController.swift */; };
+		CC1C8D411BA5B1FC00CD5AED /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C8D401BA5B1FC00CD5AED /* GroupTableViewController.swift */; };
+		CC1C8D431BA5B20600CD5AED /* DetailGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C8D421BA5B20600CD5AED /* DetailGroupViewController.swift */; };
 		CC4760131BA58BE200206239 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC4760121BA58BE200206239 /* LaunchScreen.xib */; };
 		CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59107C1BA517FD00AB51E6 /* Database.swift */; };
 		CCBB7A461BA540DA00A46F17 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB7A451BA540DA00A46F17 /* Group.swift */; };
@@ -77,7 +77,6 @@
 		030C72541BA4BAE2007F7200 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
-		030C72581BA4BC52007F7200 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		030C725C1BA4C91C007F7200 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		030C72601BA4E980007F7200 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +85,8 @@
 		7661CC81EAD296B5D2687976 /* Pods_Studr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManagerTableViewController.swift; sourceTree = "<group>"; };
 		BC035CF6D61E01DCF33C067C /* Pods-Studr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.debug.xcconfig"; sourceTree = "<group>"; };
-		CC4760101BA58ABB00206239 /* DetailGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailGroupViewController.swift; sourceTree = "<group>"; };
+		CC1C8D401BA5B1FC00CD5AED /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupTableViewController.swift; path = ../../../../Downloads/GroupTableViewController.swift; sourceTree = "<group>"; };
+		CC1C8D421BA5B20600CD5AED /* DetailGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailGroupViewController.swift; path = ../../../../Downloads/DetailGroupViewController.swift; sourceTree = "<group>"; };
 		CC4760121BA58BE200206239 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		CC59107C1BA517FD00AB51E6 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CCBB7A451BA540DA00A46F17 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -151,14 +151,14 @@
 				030C72311BA4B95F007F7200 /* Frameworks */,
 				030C71F31BA4B6FB007F7200 /* AppDelegate.swift */,
 				030C71F51BA4B6FB007F7200 /* ViewController.swift */,
+				CC1C8D401BA5B1FC00CD5AED /* GroupTableViewController.swift */,
 				7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */,
 				CC59107C1BA517FD00AB51E6 /* Database.swift */,
+				CC1C8D421BA5B20600CD5AED /* DetailGroupViewController.swift */,
 				CCBB7A451BA540DA00A46F17 /* Group.swift */,
-				CC4760101BA58ABB00206239 /* DetailGroupViewController.swift */,
 				030C725C1BA4C91C007F7200 /* LogInViewController.swift */,
 				030C72601BA4E980007F7200 /* SignUpViewController.swift */,
 				030C725E1BA4D1AC007F7200 /* InformationTableViewController.swift */,
-				030C72581BA4BC52007F7200 /* GroupTableViewController.swift */,
 				030C72571BA4BC52007F7200 /* CreateGroupViewController.swift */,
 				030C72561BA4BC52007F7200 /* FriendsTableViewController.swift */,
 				03EBBE481BA4FA6000D328FF /* AvailabilityViewController.swift */,
@@ -395,9 +395,9 @@
 				030C725F1BA4D1AC007F7200 /* InformationTableViewController.swift in Sources */,
 				CCBB7A461BA540DA00A46F17 /* Group.swift in Sources */,
 				030C72611BA4E980007F7200 /* SignUpViewController.swift in Sources */,
+				CC1C8D411BA5B1FC00CD5AED /* GroupTableViewController.swift in Sources */,
+				CC1C8D431BA5B20600CD5AED /* DetailGroupViewController.swift in Sources */,
 				030C71F61BA4B6FB007F7200 /* ViewController.swift in Sources */,
-				CC4760111BA58ABB00206239 /* DetailGroupViewController.swift in Sources */,
-				030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */,
 				030C71F41BA4B6FB007F7200 /* AppDelegate.swift in Sources */,
 				030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */,
 				CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */,
