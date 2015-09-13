@@ -19,9 +19,10 @@ class GroupTableViewController: PFQueryTableViewController {
     }
     
     required init!(coder aDecoder: NSCoder!) {
-        fatalError("init(coder:) has not been implemented")
-
+        super.init(coder: aDecoder)
         self.parseClassName = "Group"
+        
+        
     }
     override func queryForTable() -> PFQuery {
         var query = PFQuery(className: self.parseClassName!)
@@ -29,27 +30,26 @@ class GroupTableViewController: PFQueryTableViewController {
         return query
     }
     
-   
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let identifier = "cell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? PFTableViewCell
-            if cell == nil {
-                cell = PFTableViewCell(style: .Default, reuseIdentifier: identifier)
-            }
-            
-            
-            cell!.textLabel!.text = self.objectAtIndexPath(indexPath)?.objectForKey("Title") as! String
-           
-            
-            return cell!
-        }
     
-
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let identifier = "cell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? PFTableViewCell
+        if cell == nil {
+            cell = PFTableViewCell(style: .Default, reuseIdentifier: identifier)
+        }
+        
+        
+        cell!.textLabel!.text = self.objectAtIndexPath(indexPath)?.valueForKey("Title") as? String
+        
+        return cell!
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       // Database.getAllGroupsFromUser()
+        // Database.getAllGroupsFromUser()
         
     }
     
@@ -59,7 +59,7 @@ class GroupTableViewController: PFQueryTableViewController {
         self.navigationItem.setHidesBackButton(true, animated: false)
         var rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addTapped:")
         self.navigationItem.setRightBarButtonItem(rightAddBarButtonItem, animated: false)
-         var leftFriendsBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Friends", style: UIBarButtonItemStyle.Plain, target: self, action: "friendsTapped:")
+        var leftFriendsBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Friends", style: UIBarButtonItemStyle.Plain, target: self, action: "friendsTapped:")
         self.navigationItem.setLeftBarButtonItem(leftFriendsBarButtonItem, animated: false)
         self.title = "Groups"
     }
@@ -73,9 +73,9 @@ class GroupTableViewController: PFQueryTableViewController {
         
         var createGroupViewController: CreateGroupViewController = CreateGroupViewController()
         navigationController?.pushViewController(createGroupViewController, animated: true)
-    
+        
     }
-
+    
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0

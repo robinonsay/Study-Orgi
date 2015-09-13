@@ -70,8 +70,7 @@ class AvailabilityViewController: UIViewController {
     }
     
     func submitTapped(sender: UIButton){
-        var vc:GroupTableViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Users")
-        //self.navigationController?.pushViewController(vc, animated: true)
+        var vc:GroupTableViewController = GroupTableViewController(style: UITableViewStyle.Plain, className: "Group")
         self.navigationController?.setViewControllers([vc, self], animated: false)
         self.navigationController?.popViewControllerAnimated(true)
         
