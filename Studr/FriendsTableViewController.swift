@@ -11,7 +11,7 @@ import XLForm
 import Parse
 
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-    var friends = [PFObject]()
+    var friends = [String]()
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
     
@@ -23,17 +23,17 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     
     override init(style: UITableViewStyle) {
         super.init(style: style);
-        friends = Database.getAcceptedFriends()
+        friends = Database.getAllFriends()
     }
     
     override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        friends = Database.getAcceptedFriends()
+        friends = Database.getAllFriends()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        friends = Database.getAcceptedFriends()
+        friends = Database.getAllFriends()
     }
     
     override func viewDidLoad() {
@@ -61,8 +61,8 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
-        
-        cell.textLabel!.text = friends[indexPath.row].objectForKey("userName") as? String
+        var s = friends[indexPath.row]
+        cell.textLabel!.text = indexPath.row as! String
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
         cell.selectedBackgroundView = view
