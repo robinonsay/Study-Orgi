@@ -36,7 +36,6 @@
 		03EBBE491BA4FA6000D328FF /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EBBE481BA4FA6000D328FF /* AvailabilityViewController.swift */; };
 		7C2356DA1BA551BE004AD5EA /* FriendManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */; };
 		CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59107C1BA517FD00AB51E6 /* Database.swift */; };
-		CC59107F1BA5217800AB51E6 /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */; };
 		CCBB7A461BA540DA00A46F17 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBB7A451BA540DA00A46F17 /* Group.swift */; };
 		FB272AAB61975E9151E5033C /* Pods_Studr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661CC81EAD296B5D2687976 /* Pods_Studr.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -88,7 +87,6 @@
 		7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManagerTableViewController.swift; sourceTree = "<group>"; };
 		BC035CF6D61E01DCF33C067C /* Pods-Studr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studr/Pods-Studr.debug.xcconfig"; sourceTree = "<group>"; };
 		CC59107C1BA517FD00AB51E6 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
 		CCBB7A451BA540DA00A46F17 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,7 +149,6 @@
 				030C72311BA4B95F007F7200 /* Frameworks */,
 				030C71F31BA4B6FB007F7200 /* AppDelegate.swift */,
 				030C71F51BA4B6FB007F7200 /* ViewController.swift */,
-				CC59107E1BA5217800AB51E6 /* FriendTableViewController.swift */,
 				7C2356D91BA551BE004AD5EA /* FriendManagerTableViewController.swift */,
 				CC59107C1BA517FD00AB51E6 /* Database.swift */,
 				CCBB7A451BA540DA00A46F17 /* Group.swift */,
@@ -398,7 +395,6 @@
 				030C71F61BA4B6FB007F7200 /* ViewController.swift in Sources */,
 				030C725B1BA4BC52007F7200 /* GroupTableViewController.swift in Sources */,
 				030C71F41BA4B6FB007F7200 /* AppDelegate.swift in Sources */,
-				CC59107F1BA5217800AB51E6 /* FriendTableViewController.swift in Sources */,
 				030C725A1BA4BC52007F7200 /* CreateGroupViewController.swift in Sources */,
 				CC59107D1BA517FD00AB51E6 /* Database.swift in Sources */,
 				030C72591BA4BC52007F7200 /* FriendsTableViewController.swift in Sources */,

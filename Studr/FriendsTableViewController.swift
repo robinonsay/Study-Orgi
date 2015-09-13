@@ -11,7 +11,7 @@ import XLForm
 import Parse
 
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-    var friends = [String]()
+    var friends = [PFObject]()
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
     
