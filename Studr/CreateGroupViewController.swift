@@ -129,10 +129,10 @@ class CreateGroupViewController: XLFormViewController {
         var title = dictionary[Tags.Title.rawValue] as! String
         var description = dictionary[Tags.Title.rawValue] as! String
         var location = dictionary[Tags.Title.rawValue] as! String
-        var `private` = dictionary[Tags.Title.rawValue] as! Bool
+        //var `private` = dictionary[Tags.Title.rawValue] as! Bool
         // Store in database here
         var group = Group()
-         group.groupID = Database.mkGroup(title, description: description, isPublic: `private`, startDate: NSDate(), endDate: NSDate(), location: location)
+         group.groupID = Database.mkGroup(title, description: description, isPublic: false, startDate: NSDate(), endDate: NSDate(), location: location)
         Database.userGroups.append(group)
         
         // Move on

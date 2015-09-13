@@ -13,10 +13,43 @@ import XLForm
 
 class GroupTableViewController: PFQueryTableViewController {
     
+    override init(style: UITableViewStyle, className: String?) {
+        super.init(style:style, className: className)
+        
+    }
+    
+    required init!(coder aDecoder: NSCoder!) {
+        fatalError("init(coder:) has not been implemented")
+
+        self.parseClassName = "Group"
+    }
+    override func queryForTable() -> PFQuery {
+        var query = PFQuery(className: self.parseClassName!)
+        query.whereKey("members", containsAllObjectsInArray: [PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId)])
+        return query
+    }
+    
+   
+        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            let identifier = "cell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? PFTableViewCell
+            if cell == nil {
+                cell = PFTableViewCell(style: .Default, reuseIdentifier: identifier)
+            }
+            
+            
+            cell!.textLabel!.text = self.objectAtIndexPath(indexPath)?.objectForKey("Title") as! String
+           
+            
+            return cell!
+        }
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Database.getAllGroupsFromUser()
+       // Database.getAllGroupsFromUser()
         
     }
     
@@ -40,28 +73,7 @@ class GroupTableViewController: PFQueryTableViewController {
         navigationController?.pushViewController(createGroupViewController, animated: true)
     
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
-        
-        
-        var query = PFQuery(className:"Group")
-        var group = query.getObjectWithId(Database.userGroups[indexPath.row].groupID)
-        cell.textLabel!.text = group?.objectForKey("Title") as? String
-        var view: UIView = UIView()
-        view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
-        cell.selectedBackgroundView = view
-//        if self.rowDescriptor?.value != nil {
-//            
-//            cell.accessoryType = contains(self.rowDescriptor!.value as! [String], cell.textLabel!.text!) ? .Checkmark : .None
-//            
-//            if contains(self.rowDescriptor!.value as! [String], cell.textLabel!.text!){
-//                self.selectedCells.append(indexPath)
-//            }
-//        }
-        return cell;
 
-    }
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
         let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
