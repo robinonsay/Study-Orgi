@@ -84,6 +84,17 @@ class Database {
                         dates[i] = Array(avail[j].keys)[i]
                     }
                 }
+                
+                var t = 0
+                var d = ""
+                for var i=0;i<totals.count && i<dates.count;++i{
+                    if t < totals[i]{
+                        t = totals[i]
+                        d = dates[i]
+                    }
+                }
+                group?.setObject(d, forKey: "bestDate")
+                
             }
             
             var myDic:[String:Int] = [:]
@@ -94,7 +105,7 @@ class Database {
             }
             
             print(myDic)
-            
+            //group?.setObject(d, forKey: "bestDate")
             group?.setObject(myDic, forKey: "totalAvail")
             group?.saveInBackgroundWithBlock({ (b: Bool, err: NSError?) -> Void in
                 if b{
@@ -117,8 +128,19 @@ class Database {
         status.whereKey("status", equalTo: "accepted")
 
         var query = PFQuery.orQueryWithSubqueries([friend,status])
-        var users = query.findObjects() as! [PFObject]
+        var users = [PFObject]()
         
+        //        query.findObjectsInBackgroundWithBlock {
+        //            (objects: [AnyObject]?, error: NSError?) -> Void in
+        //            if error == nil{
+        //                users = objects as! [PFObject]
+        //            }else{
+        //                //Handle error
+        //                print(error)
+        //            }
+        //        }
+        users = query.findObjects() as! [PFObject]
+        print(users.count)
         return users
     }
     
@@ -173,6 +195,57 @@ class Database {
             group.addObject(userPointer, forKey: "members")
             group.setObject(location, forKey: "Location")
             
+            //Push that PFObject onto the database
+            var myID = ""
+            group.save()
+            group.fetch()
+            
+            //            group.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            //                if success{
+            //
+            //                    group.fetchInBackgroundWithBlock { (obj:PFObject?, error:NSError?) -> Void in
+            //                        if obj != nil && error == nil{
+            //                            println(obj)
+            //                            myID = obj!.objectId!
+            //                            println("SUCESSSSSSSSS")
+            //
+            //                        }else{
+            //                            print(error)
+            //                            println(" ERRRORR in mkGroup")
+            //                        }
+            //                    }
+            //                }else{
+            //                    print(error)
+            //                    println(" ERRRORin mkGroup")
+            //                }
+            //            }
+            
+            
+            myID = group.objectId!
+            print("REACHED STATMENT")
+            println(group.objectId)
+            return myID
+    }
+    static func mkGroup(title:String, description:String, isPublic:Bool,
+        startDate:NSDate, endDate:NSDate, location:String, membersIDs:[String])->String{
+            var creatorID = PFUser.currentUser()?.objectId
+            print("add")
+            let userPointer = PFObject(withoutDataWithClassName:USER, objectId: creatorID)
+           
+            let group = PFObject(className: "Group")
+            
+            //Assign the properties of the group to the PFObject
+            group.setObject(title, forKey: "Title")
+            group.setObject(description, forKey: "Description")
+            group.setObject(isPublic, forKey: "Public")
+            group.setObject(userPointer, forKey: "Creator")
+            group.setObject(startDate, forKey: "Start")
+            group.setObject(endDate, forKey: "End")
+            group.addObject(userPointer, forKey: "members")
+            group.setObject(location, forKey: "Location")
+            for id in membersIDs{
+                group.addObject(PFObject(withoutDataWithClassName:USER, objectId:id), forKey: "members")
+            }
             //Push that PFObject onto the database
             var myID = ""
             group.save()

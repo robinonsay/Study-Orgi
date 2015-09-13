@@ -132,8 +132,14 @@ class CreateGroupViewController: XLFormViewController {
         //var `private` = dictionary[Tags.Title.rawValue] as! Bool
         // Store in database here
         var group = Group()
-         group.groupID = Database.mkGroup(title, description: description, isPublic: false, startDate: NSDate(), endDate: NSDate(), location: location)
+        if FriendsTableViewController.memberID != nil {
+            group.groupID = Database.mkGroup(title, description: description, isPublic: false, startDate: NSDate(), endDate: NSDate(), location: location, membersIDs: FriendsTableViewController.memberID)
+        }else {
+           
+            group.groupID = Database.mkGroup(title, description: description, isPublic: false, startDate: NSDate(), endDate: NSDate(), location: location)
+        }
         Database.userGroups.append(group)
+        
         Database.pickBestDate(Database.userGroups[Database.userGroups.endIndex-1].groupID)
         
         // Move on

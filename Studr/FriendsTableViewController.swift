@@ -11,7 +11,8 @@ import XLForm
 import Parse
 
 class FriendsTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-    var friends = [String]()
+    static var memberID:[String]!
+    var friends = [PFObject]()
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
     
@@ -23,17 +24,23 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     
     override init(style: UITableViewStyle) {
         super.init(style: style);
-        friends = Database.getAllFriends()
+        FriendsTableViewController.memberID = [String]()
+        friends = Database.getAllUsers()
+        //friends = Database.getAcceptedFriends()
     }
     
     override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        friends = Database.getAllFriends()
+        friends = Database.getAllUsers()
+        //friends = Database.getAcceptedFriends()
+        FriendsTableViewController.memberID = [String]()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        friends = Database.getAllFriends()
+        friends = Database.getAllUsers()
+        //friends = Database.getAcceptedFriends()
+        FriendsTableViewController.memberID = [String]()
     }
     
     override func viewDidLoad() {
@@ -61,8 +68,8 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
-        var s = friends[indexPath.row]
-        cell.textLabel!.text = indexPath.row as! String
+        var s = friends[indexPath.row].objectForKey("username") as? String
+        cell.textLabel!.text = s
         var view: UIView = UIView()
         view.backgroundColor = UIColorFromHex(0xF68E20, alpha: 0.05)
         cell.selectedBackgroundView = view
@@ -87,7 +94,9 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        FriendsTableViewController.memberID.append(friends[indexPath.row].objectId!)
         
+            
         if (contains(self.selectedCells, indexPath)){
             
             cell!.accessoryType = UITableViewCellAccessoryType.None;
