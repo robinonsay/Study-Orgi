@@ -36,6 +36,14 @@ class AvailabilityViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor()
         
+        var info:UILabel = UILabel(frame: CGRectMake(0, self.view.frame.height - 100, self.view.frame.width, 50))
+        info.text = "Select the days that you're availble"
+        info.tintColor = UIColorFromHex(0xDBDBDB, alpha: 1.0)
+        info.textColor = UIColorFromHex(0xDBDBDB, alpha: 1.0)
+        info.textAlignment = .Center
+        self.view.addSubview(info)
+        
+        
         var submit: UIButton = UIButton(frame: CGRectMake(0, self.view.frame.height - 50, self.view.frame.width, 50))
         submit.backgroundColor = UIColorFromHex(0x13EB91, alpha: 1.0)
         submit.tintColor = UIColor.whiteColor()
