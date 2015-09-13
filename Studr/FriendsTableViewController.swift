@@ -14,7 +14,7 @@ class FriendsTableViewController : UITableViewController, XLFormRowDescriptorVie
     var friends = [String]()
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
-    
+    var friends = [PFObject]()
     // Current cell
     var cell : UITableViewCell?
     

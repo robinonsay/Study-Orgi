@@ -48,9 +48,10 @@ class Database {
     
    
     
-    static func pickBestDate(groupID:String)->[Int]{
+    static func pickBestDate(groupID:String){
         var totals = [Int]()
-        totals = [0,0,0,0,0,0,0]
+        var dates = [String]()
+        //totals = [0,0,0,0,0,0,0]
         var groupQuery = PFQuery(className: "Group")
         var membersInGroup:[PFObject]!
         
@@ -79,14 +80,28 @@ class Database {
                 
                 for var i=0;i<7;++i{
                     totals[i] = totals[i] + Array(avail[i].values)[i]
+                    dates[i] = Array(avail[i].keys)[i]
                 }
             }
             
+            var myDic = [[String:Int]]()
+            for var i=0;i<totals.count && i<dates.count;++i{
+                myDic[i].updateValue(totals[i], forKey: dates[i])
+            }
             
+            group?.setObject(myDic, forKey: "totalAvail")
+            group?.saveInBackgroundWithBlock({ (b: Bool, err: NSError?) -> Void in
+                if b{
+                    println("Success")
+                }else {
+                    println(err)
+                }
+            })
             
         }
 
-        return totals
+        
+        
         
     }
     static func getAcceptedFriends()->[PFObject]{

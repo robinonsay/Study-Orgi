@@ -59,8 +59,6 @@ class GroupTableViewController: PFQueryTableViewController {
         self.navigationItem.setHidesBackButton(true, animated: false)
         var rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addTapped:")
         self.navigationItem.setRightBarButtonItem(rightAddBarButtonItem, animated: false)
-         var leftFriendsBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Friends", style: UIBarButtonItemStyle.Plain, target: self, action: "friendsTapped:")
-        self.navigationItem.setLeftBarButtonItem(leftFriendsBarButtonItem, animated: false)
         self.title = "Groups"
     }
     
@@ -71,22 +69,13 @@ class GroupTableViewController: PFQueryTableViewController {
     
     func addTapped(sender:UIButton) {
         
-        var createGroupViewController: CreateGroupViewController = CreateGroupViewController()
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
         navigationController?.pushViewController(createGroupViewController, animated: true)
     
     }
-
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
-    }
     func friendsTapped(sender:UIButton) {
         
-        var friendTableViewController: FriendTableViewController = FriendTableViewController()
-        navigationController?.pushViewController(friendTableViewController, animated: true)
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
 }
 

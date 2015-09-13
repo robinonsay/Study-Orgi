@@ -37,21 +37,19 @@ class FriendTableViewController: UITableViewController ,UISearchBarDelegate, UIS
         super.init(coder: aDecoder)
         initialize()
     }
-    /*
-    self.filteredCandies = self.candies.filter({( candy: Candy) -> Bool in
-    let categoryMatch = (scope == "All") || (candy.category == scope)
-    let stringMatch = candy.name.rangeOfString(searchText)
-    return categoryMatch && (stringMatch != nil)
-    })
-    */
-//    func filterContentForSearchText(searchText: String) {
-//        // Filter the array using the filter method
-//        self.friends = self.friends.filter({( friend: String) -> Bool in
-//            let categoryMatch = (scope == "All") || (friends.category == scope)
-//            let stringMatch = friends.name.rangeOfString(searchText)
-//            return categoryMatch && (stringMatch != nil)
-//        })
-//    }
+    
+    func initialize(){
+        friends = Database.getAcceptedFriends()
+        users = Database.getAllUsers()
+        requests = users.filter { element in
+            contains(self.friends, element)
+        }
+        users.filter { element in
+            !contains(self.requests, element)
+        }
+        allUsers = [friends, requests, users]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
