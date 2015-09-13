@@ -135,9 +135,7 @@ class CreateGroupViewController: XLFormViewController {
         
         var tarr =  Database.pickBestDate(str)
         
-        for i in tarr{
-            println(i)
-        }
+        
 
         
     }

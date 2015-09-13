@@ -28,11 +28,11 @@ class Database {
         }
     }
     
-    static func setAvailability(userAvailability:[Int]){
+    static func setAvailability(userAvailability:[String:Int]){
         var userAva = PFObject(className: "UserAvailability")
         var myID = PFUser.currentUser()?.objectId
         userAva.setObject(PFObject(withoutDataWithClassName: "_User", objectId: myID), forKey: "User")
-        userAva.setObject(userAvailability, forKey: "Availability")
+        userAva.addObject(userAvailability, forKey: "Availability")
         userAva.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success) {
                 // The object has been saved.
@@ -78,10 +78,10 @@ class Database {
             println()
             
             for object in objects {
-                var avail:[Int] = object.objectForKey("Availability") as! [Int]
+                var avail:[[String:Int]] = object.objectForKey("Availability") as! [[String:Int]]
                 
                 for var i=0;i<7;++i{
-                    totals[i] = totals[i] + avail[i]
+                    totals[i] = totals[i] + Array(avail[i].values)[i]
                 }
             }
             
@@ -93,29 +93,25 @@ class Database {
         
     }
     
-    static func getSomeFriends()->[PFObject]{
-        var quereyRec = PFQuery(className: "FriendRequests")
-        quereyRec.whereKey("Receiver", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
-        var quereySender = PFQuery(className: "FriendRequests")
-        quereySender.whereKey("Sender", equalTo: PFObject(withoutDataWithClassName: "_User", objectId:PFUser.currentUser()!.objectId!))
+    static func getAcceptedFriends()->[String]{
+        var accept = "accepted"
+        var friend = PFQuery(className: "FriendRequests")
+        friend.whereKey("toUser", equalTo: PFObject(withoutDataWithClassName: "_User", objectId: PFUser.currentUser()?.objectId))
         var status = PFQuery(className: "FriendRequests")
-        status.whereKey("Accepted", equalTo: true)
-        var friends = [PFObject]()
-        var querey = PFQuery.orQueryWithSubqueries([quereyRec,status])
-        querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
-            if error == nil{
-                friends = results as! [PFObject]
+        status.whereKey("status", equalTo: accept)
+        var resultant = [String]()
+        var query = PFQuery.orQueryWithSubqueries([friend,status])
+        query.findObjectsInBackgroundWithBlock { (result:[AnyObject]?, err:NSError?) -> Void in
+            if err == nil{
+                var res = result as! [PFObject]
+                for var i=0 ;i < res.count;++i{
+                    resultant[i] = res[i].objectForKey("status") as! String
+                 }
+            }else{
+                println(err)
             }
         }
-        
-        var querey2 = PFQuery.orQueryWithSubqueries([quereyRec,status])
-        querey.findObjectsInBackgroundWithBlock { (results:[AnyObject]?, error:NSError?) -> Void in
-            if error == nil{
-                friends = friends + (results as! [PFObject])
-            }
-        }
-        return friends
-
+        return resultant
     }
     static func mkGroup(title:String, description:String, isPublic:Bool,
         startDate:NSDate, endDate:NSDate, location:String)->String{
